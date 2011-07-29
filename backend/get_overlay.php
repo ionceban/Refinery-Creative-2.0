@@ -61,80 +61,121 @@
 	
 	$response .= '<div id="overlay-left">';
 	$response .= '<div id="overlay-left-content">';
-	$response .= '<div id="other-wrapper">';
-	$response .= '<div class="overlay-block">';
-	$response .= '<h1>other ';
 	
 	$query_statement_2 = "SELECT name FROM projects WHERE id='" . $_POST['project_id'] . "'";
 	$query_2 = mysql_query($query_statement_2);
 	$row_2 = mysql_fetch_array($query_2);
 	
-	$response .= $row_2['name'] . "</h1>";
 	$GLOBAL_PROJECT = $row_2['name'];
 	
-	$response .= '<ul class="overlay-list clearfix">';
-	
 	$image_array = get_images($_POST['project_id'], $mediums['id'][1], $db_conn);
-	for ($i = 1; $i <= $image_array[0]; $i++){
-		if ($image_array['id'][$i] != $_POST['image_id']){
-			$response .= '<li>';
-			$response .= "<a href='#'>";
-			$response .= "<div class='img-container'>";
-			$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-			$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] . "</h5></span>";
-			$response .= "</div>";
-			$response .= "</a>";
-			$response .= '</li>';
-		}
-	}	
-
 	
-	$response .= '</ul>';
-	$response .= '</div>';
-	$response .= '</div>';
-	$response .= '<div id="tv-spots">';
-	$response .= '<div class="overlay-block">';
-	$response .= '<h1>' . $mediums['name'][2] . '</h1>';
-	$response .= '<ul class="overlay-list clearfix">';
+	if ($image_array[0] > 1){
 	
+		$response .= '<div id="other-wrapper">';
+		$response .= '<div class="overlay-block">';
+		$response .= '<h1>other ';
+		
+		$query_statement_2 = "SELECT name FROM projects WHERE id='" . $_POST['project_id'] . "'";
+		$query_2 = mysql_query($query_statement_2);
+		$row_2 = mysql_fetch_array($query_2);
+		
+		$response .= $row_2['name'] . "</h1>";
+		
+		$response .= '<ul class="overlay-list clearfix">';
+		
+		for ($i = 1; $i <= $image_array[0]; $i++){
+			if ($image_array['id'][$i] != $_POST['image_id']){
+				$response .= '<li>';
+				$response .= "<a href='#'>";
+				$response .= "<div class='img-container'>";
+				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] . "</h5></span>";
+				$response .= "</div>";
+				$response .= "</a>";
+				$response .= '</li>';
+			}
+		}	
+	
+		
+		$response .= '</ul>';
+		$response .= '</div>';
+		$response .= '</div>';
+	}
 	
 	$image_array = get_images($_POST['project_id'], $mediums['id'][2], $db_conn);
-	for ($i = 1; $i <= $image_array[0]; $i++){
-		if ($image_array['id'][$i] != $_POST['image_id']){
-			$response .= '<li>';
-			$response .= "<div class='img-container'>";
-			$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-			$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
-			$response .= "</div>";
-			$response .= '</li>';
+	if ($image_array[0] >0){
+		$response .= '<div id="tv-spots">';
+		$response .= '<div class="overlay-block">';
+		$response .= '<h1>' . $mediums['name'][2] . '</h1>';
+		$response .= '<ul class="overlay-list clearfix">';
+		
+		
+		for ($i = 1; $i <= $image_array[0]; $i++){
+			if ($image_array['id'][$i] != $_POST['image_id']){
+				$response .= '<li>';
+				$response .= "<div class='img-container'>";
+				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
+				$response .= "</div>";
+				$response .= '</li>';
+			}
 		}
+		
+		
+		$response .= '</ul>';
+		$response .= '</div>';
+		$response .= '</div>';
 	}
-	
-	
-	$response .= '</ul>';
-	$response .= '</div>';
-	$response .= '</div>';
-	$response .= '<div id="banner">';
-	$response .= '<div class="overlay-block">';
-	$response .= '<h1>' . $mediums['name'][3] . '</h1>';
-	$response .= '<ul class="overlay-list clearfix">';
-	
 	
 	$image_array = get_images($_POST['project_id'], $mediums['id'][3], $db_conn);
-	for ($i = 1; $i <= $image_array[0]; $i++){
-		if ($image_array['id'][$i] != $_POST['image_id']){
-			$response .= '<li>';
-			$response .= "<div class='img-container'>";
-			$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-			$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
-			$response .= "</div>";
-			$response .= '</li>';
+	if ($image_array[0] > 0){
+		$response .= '<div id="banner">';
+		$response .= '<div class="overlay-block">';
+		$response .= '<h1>' . $mediums['name'][3] . '</h1>';
+		$response .= '<ul class="overlay-list clearfix">';
+		
+		
+		
+		for ($i = 1; $i <= $image_array[0]; $i++){
+			if ($image_array['id'][$i] != $_POST['image_id']){
+				$response .= '<li>';
+				$response .= "<div class='img-container'>";
+				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
+				$response .= "</div>";
+				$response .= '</li>';
+			}
 		}
+		
+		$response .= '</ul>';
+		$response .= '</div>';
+		$response .= '</div>';
 	}
-	
-	$response .= '</ul>';
-	$response .= '</div>';
-	$response .= '</div>';
+	$image_array = get_images($_POST['project_id'], $mediums['id'][4], $db_conn);
+	if ($image_array[0] > 0){
+		$response .= '<div id="med4">';
+		$response .= '<div class="overlay-block">';
+		$response .= '<h1>' . $mediums['name'][4] . '</h1>';
+		$response .= '<ul class="overlay-list clearfix">';
+		
+		
+		
+		for ($i = 1; $i <= $image_array[0]; $i++){
+			if ($image_array['id'][$i] != $_POST['image_id']){
+				$response .= '<li>';
+				$response .= "<div class='img-container'>";
+				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
+				$response .= "</div>";
+				$response .= '</li>';
+			}
+		}
+		
+		$response .= '</ul>';
+		$response .= '</div>';
+		$response .= '</div>';
+	}
 	$response .= '<div id="related work">';
 	$response .= '<div class="overlay-block">';
 	$response .= '<h1>related work</h1>';
