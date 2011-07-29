@@ -457,7 +457,7 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	 * Initial show of the filter tab
 	 */
 	showFilterTab: function() {
-		this.el.fadeIn(600).find('.filter-title span').html(this.current_section);
+		this.el.fadeIn(600);//.find('.filter-title span').html(this.current_section);
 	},
 	
 	/**

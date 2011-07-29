@@ -1,41 +1,38 @@
 <?php
 	require('db_connect.php');
 	require('db_utils.php');
-
-	$available = array('print', 'av', 'interactive', 'digital motion', 'home entertainment', 'broadcast', 'theatrical', 'gaming');	
-
-	$get_index = array();
-	$get_index['print'] = 0;
-	$get_index['av'] = 0;
-	$get_index['digital motion'] = 0;
-	$get_index['interactive'] = 0;
-	$get_index['home entertainment'] = 1;
-	$get_index['theatrical'] = 1;
-	$get_index['broadcast'] = 1;
-	$get_index['gaming'] = 1;
 	
-	$cross_table = array('mediscs', 'didiscs');
-
-	$column_name = array('medium_id', 'division_id');
-
-	$cross_column_name = array('medisc_id', 'didisc_id');
+	$category = decode_cat_name($_POST['category']);
 	
-	$category = $_POST['category'];
-	if (!$category) die("Please select a category");
-
-	$category = decode_cat_name($category);
-
-	$exists = 0;
-
-	for ($i = 0; $i < 8; $i++)
-		if ($available[$i] == $category) $exists = 1;
-
-	if ($exists == 0) die("Invalid category");
+	$query_statement = "SELECT id FROM mediums WHERE name='" . $category . "'";
+	$query = mysql_query($query_statement, $db_conn);
+	$row = mysql_fetch_row($query);
 	
-	$current_index = $get_index[$category];
+	if ($row){
+		$table = "mediums";
+		$table_id = "medium_id";
+		$cross_table = "mediscs";
+		$cross_table_id = "medisc_id";
+		$category_id = $row[0];
+	}
 	
-	if ($current_index == 0) $category_id = get_medium_by_name($category, $db_conn);
-	else $category_id = get_division_by_name($category, $db_conn);
+	if (!$table){
+		$query_statement = "SELECT id FROM divisions WHERE name='" . $category . "'";
+		$query = mysql_query($query_statement, $db_conn);
+		$row = mysql_fetch_row($query);
+		
+		if ($row){
+			$table = "divisions";
+			$table_id = "division_id";
+			$cross_table = "didiscs";
+			$cross_table_id = "didisc_id";
+			$category_id = $row[0];
+		}
+	}
+	
+	if (!$table){
+		die("Invalid category");
+	}
 	
 	$response = "";
 	$response .= "<ul id='filter-header'>";
@@ -43,25 +40,22 @@
 	$response .= "<strong>category:</strong>";
 	$response .= "<span>" . $category . "</span>";
 	$response .= "</li>";
+	
+	$query_statement = "SELECT COUNT(*) FROM images, " . $cross_table . " WHERE ";
+	$query_statement .= "(images." . $cross_table_id . "=" . $cross_table . ".id";
+	$query_statement .= " AND " . $cross_table . "." . $table_id . "='" . $category_id . "')";
+	$query = mysql_query($query_statement, $db_conn);
+	$row = mysql_fetch_row($query);
+	
 	$response .= "<li class='filter-title'>";
 	$response .= "<strong>results:</strong>";
-	
-	$query_statement = "SELECT * FROM " . $cross_table[$current_index] . " WHERE " . $column_name[$current_index] . "='" . $category_id . "'";
-	$query = mysql_query($query_statement, $db_conn);
-	$cross_table_array = array();
-	while ($row = mysql_fetch_array($query)){
-		array_push($cross_table_array, $cross_column_name[$current_index] . "='" . $row['id'] . "'");
-	}
-	$query_statement = select_query('images', get_list($cross_table_array, " OR "));
-	$query = mysql_query($query_statement, $db_conn);
-	$num_res = mysql_num_rows($query);
-	
-	$response .= "<span>" . $num_res . "</span>";
+	$response .= "<span>" . $row[0] . "</span>";
 	$response .= "</li>";
 	$response .= "<li class='header-right'>";
 	$response .= "clear refinements";
 	$response .= "</li>";
 	$response .= "</ul>";
+	
 	$response .= "<div class='filter-types'>";
 	$response .= "<dl class='first-col discipline'>";
 	$response .= "<dt>";
@@ -71,15 +65,17 @@
 	$response .= "<a href='#' rel='show-all'>show all results</a>";
 	$response .= "</dd>";
 	
-	$query_statement = "SELECT * FROM " . $cross_table[$current_index] . " WHERE " . $column_name[$current_index] . "='" . $category_id ."'";
+	$query_statement = "SELECT disciplines.name, COUNT(*) FROM images, " . $table . ", " . $cross_table;
+	$query_statement .= ", disciplines WHERE (images." . $cross_table_id . "=" . $cross_table . ".id";
+	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
+	$query_statement .= " AND disciplines.id=" . $cross_table . ".discipline_id";
+	$query_statement .= " AND " . $table . ".name='" . $category . "') GROUP BY disciplines.name";
+	$query_statement .= " ORDER BY disciplines.name";
 	$query = mysql_query($query_statement, $db_conn);
-	while ($row = mysql_fetch_array($query)){
-		$query_statement_2 = "SELECT name FROM disciplines WHERE id='" . $row['discipline_id'] . "' ORDER BY name";
-		$query_2 = mysql_query($query_statement_2, $db_conn);
-		$row_2 = mysql_fetch_array($query_2);
-		$discipline = $row_2['name'];
+	
+	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $discipline . "'>" . $discipline . "</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	
@@ -92,11 +88,18 @@
 	$response .= "<a href='#' rel='show-all'>show all results</a>";
 	$response .= "</dd>";
 	
-	$query_statement = "SELECT name FROM deliverables ORDER BY name";
-	$query = mysql_query($query_statement, $db_conn);
-	while ($row = mysql_fetch_array($query)){
+	$query_statement = "SELECT deliverables.name, COUNT(*) FROM images, deliverables, imgdelivs";
+	$query_statement .= ", " . $table . ", " . $cross_table . " ";
+	$query_statement .= " WHERE (images.id=imgdelivs.image_id AND deliverables.id=imgdelivs.deliverable_id";
+	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
+	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
+	$query_statement .= " AND " . $table . ".name='" . $category . "')";
+	$query_statement .= " GROUP BY deliverables.name ORDER BY deliverables.name";
+	$query= mysql_query($query_statement, $db_conn);
+	
+	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row['name'] . "'>" . $row['name'] . "</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	
@@ -109,11 +112,18 @@
 	$response .= "<a href='#' rel='show-all'>show all results</a>";
 	$response .= "</dd>";
 	
-	$query_statement = "SELECT name FROM keywords ORDER BY name";
+	$query_statement = "SELECT keywords.name, COUNT(*) FROM images, keywords, imgkeyws";
+	$query_statement .= ", " . $table . ", " . $cross_table . " ";
+	$query_statement .= "WHERE (images.id=imgkeyws.image_id AND keywords.id=imgkeyws.keyword_id";
+	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
+	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
+	$query_statement .= " AND " . $table . ".name='" . $category . "')";
+	$query_statement .= " GROUP BY keywords.name ORDER BY keywords.name";
 	$query = mysql_query($query_statement, $db_conn);
-	while ($row = mysql_fetch_array($query)){
+	
+	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row['name'] . "'>" . $row['name'] . "</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	
@@ -126,16 +136,21 @@
 	$response .= "<a href='#' rel='show-all'>show all results</a>";
 	$response .= "</dd>";
 	
-	$query_statement = "SELECT value FROM years ORDER BY value";
+	$query_statement = "SELECT years.value, COUNT(*) FROM images, years";
+	$query_statement .= ", " . $table . ", " . $cross_table . " ";
+	$query_statement .= " WHERE (years.id=images.year_id";
+	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
+	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
+	$query_statement .= " AND " . $table . ".name='" . $category . "')";
+	$query_statement .= " GROUP BY years.value ORDER BY years.value";
 	$query = mysql_query($query_statement, $db_conn);
-	while ($row = mysql_fetch_array($query)){
+	
+	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row['value'] . "'>" . $row['value'] . "</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
-	
 	$response .= "</dl>";
-	$response .= "</div>";
 	
 	echo $response;
 ?>
