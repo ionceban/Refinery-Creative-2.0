@@ -21,6 +21,8 @@
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.14.custom.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" /><!-- styles needed by jScrollPane -->
         <link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+     
+        
     </head>
     <body>
         <!--<div id="container" class="intro">-->
@@ -1162,7 +1164,7 @@
                             <header>
                                 <h3>send us a message</h3>
                             </header>
-                            <form>
+                            <form id="contact-form" action="backend/mailer.php" method="POST">
                                 <div class="float-left">
                                     <label for="fname">
 										first name
@@ -1181,12 +1183,12 @@
                                     <label for="message">
 										message
                                     </label>
-                                    <textarea>
-                                    </textarea>
+                                    <textarea name="message"></textarea>
                                     <div class="checkbox-wrapper">
-                                        <input type="checkbox" />
+                                        <input name="self_message" type="checkbox" />
 										send a copy of this message to yourself
                                     </div>
+                                    
                                     <input type="submit" id="send-button" name="send" value="send" />
                                 </div>
                             </form>
@@ -1383,6 +1385,7 @@
             <script type="text/javascript" src="javascripts/routers.js"></script>
             <script type="text/javascript" src="javascripts/sectionize.js"></script>
             <script type="text/javascript" src="javascripts/application.js"></script>
+            <script type="text/javascript" src="javascripts/jquery.form.js"></script>
             <script>
                 $(function() {
                     $("#login-dropdown, #employee-login").click(function() { return false; })
@@ -1437,6 +1440,32 @@
                 );
 
                    
+                });
+                
+                // contact form email
+                
+                function validateFields(formData,jqForm, options){
+                	for (var i = 1; i < formData.length; i += 1){
+                		if (!formData[i].value){
+                			alert("Please fill in all details");
+                			return false;
+                		}
+                	}
+                	return true;
+                }
+                
+                function showMailResponse(responseText, statusText, xhr, $form)  {
+                	if (responseText == "success"){
+                		$('#contact-form')[0].reset();
+                		alert('Message sent');
+                	}
+                }
+                
+                $(document).ready(function(){
+                	$('#contact-form').ajaxForm({
+                		beforeSubmit: validateFields,
+                		success: showMailResponse
+                	});
                 });
 
                     
