@@ -543,7 +543,8 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		$('#main-slider').bxSlider();
 		
-		$('#other-wrapper .overlay-block ul a img').click(function() {
+		$('#other-wrapper .overlay-block ul a img').click(function(evt) {
+			evt.preventDefault();
 			var overlay_attrs = $(this).attr('class').split('_');
 			var ajax_overlay = new XMLHttpRequest();
 			ajax_overlay.open("POST", "backend/get_overlay.php", true);
@@ -642,8 +643,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	},
 	
 	_handleOverlayHovers: function(){
-		$('#other-wrapper img').css('opacity', '0.5');
-		
 		$('.img-container img').mouseenter(function(){
 			$(this).parent().find('.tooltip').css('display', 'block');
 			$(this).parent().find('.tooltip').css('top', '-13px');
