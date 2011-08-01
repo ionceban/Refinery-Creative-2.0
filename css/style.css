@@ -94,7 +94,7 @@ strong {
     width: 970px;
 }
 #container.site {
-    min-height: 550px;
+    min-height: 500px;
 }
 
 /* tooltip */
@@ -160,6 +160,11 @@ strong {
     background: url(../images/loading.gif) center center no-repeat;
 }
 
+
+#push-content {
+	min-height:450px;
+	height:1200px;
+}
 
 #btn-showsite {
     display: block;
@@ -501,11 +506,12 @@ strong {
     font-size: 36px;
 }
 #work-inner {
+	padding-top:24px;
     overflow: hidden;
 }
 #dummy-work-inner {
     margin-top: 0;
-    margin-top: 24px;
+    /*margin-top: 24px;*/
     padding: 0 0 55px 0;
 }
 .work-section {

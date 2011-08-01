@@ -41,7 +41,7 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 		this._clearWebSections();
 		
 		// in here there is a DAMN problem
-		Sectionize.reset();
+		//Sectionize.reset();
 		
 		// abort section content render
 		this._abortSectionRender();
@@ -216,6 +216,7 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 			$('#content-wrapper').css({ 'display': 'none', 'opacity': 0 });
 			
 			$('#main-logo').fadeOut(500, function() {
+				$('#push-content').css({'min-height': 0});
 				$('#push-content').animate({
 					'height': 0
 				},

@@ -92,8 +92,8 @@ var webSections = (function() {
 				scrollTop: scroll
 			},
 			{
-				duration: 1250,
-				easing: 'easeInOutExpo',
+				duration: 350,
+				//easing: 'easeInOutExpo',
 				//easing: 'linear',
 				//easing: 'easeInSine',
 				//easing: 'easeInOutQuint',
@@ -212,6 +212,8 @@ $(function() {
 	/*
 		Set the container to the window's height
 	*/
+	var wh_height = 61;
+	
 	$(window).resize(function() {
 		if($('#push-content').length < 1) return;
 		var wh = $(window).height();
@@ -220,12 +222,12 @@ $(function() {
 		$('#container').css({'padding-top': 1}).height($(window).height());
 		
 		// if the container is smaller than 550 return
-		if($('#container').height() > 550) {
-			$('#push-content').css({ 'height': (wh - 61) + 'px' })
+		if($('#container').height() >500) {
+			$('#push-content').css({ 'height': (wh - wh_height) + 'px' })
 		}
 	});
 	$('#container').height($(window).height());
-	$('#push-content').css({ 'height': ($(window).height() - 61) + 'px' });
+	$('#push-content').css({ 'height': ($(window).height() - wh_height) + 'px' });
 	
 	
 	/*
