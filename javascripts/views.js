@@ -542,12 +542,26 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		// overlay slide initializer
 		var overlay_slider = $('#main-slider').bxSlider({
-			infiniteLoop: false
+			infiniteLoop: false,
+			speed: 300,
+			onAfterSlide: function(currentSlideNumber, totalSlideQty) {
+				if(currentSlideNumber > 0 && (currentSlideNumber + 1) != totalSlideQty) {
+					$('.bx-prev, .bx-next').fadeIn(500);
+				}
+			},
+			onLastSlide: function() {
+				$('.bx-next').fadeOut(500);
+			},
+			onFirstSlide: function() {
+				$('.bx-prev').fadeOut(500);
+			}
 		});
 		// if the slider has less than 2 total slides
 		if(overlay_slider.getSlideCount() < 2) {
-			$('.bx-prev, .bx-next').hide();
+			$('.bx-prev, .bx-next').fadeOut(500);
 		}
+		// hide the prev arrow on init
+		$('.bx-prev').hide();
 		
 		$('#other-wrapper .overlay-block ul a img').click(function(evt) {
 			evt.preventDefault();

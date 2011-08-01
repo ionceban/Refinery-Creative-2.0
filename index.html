@@ -31,28 +31,13 @@
             <section id="main-logo" style="">
 
                 <div id="video-wrapper">
-                    <video  id="video" width="598" height="325" loop autoplay="true">
+                    <video  id="video" width="598" height="325" loop autoplay="true">-->
                         <source src="video/refinery.m4v" type="video/mp4" />
                         <source src="video/refinery.ogg" />
                     </video>
 
                 </div><!-- end video-wrapper -->
                 
-                <script type="text/javascript">
-                    /*
-                var video = document.getElementById('video');
-                video.onended = function(e) {
-                        $(video).hide()
-                        $('#refinery-poster').fadeIn(1400);
-                }
-				
-                video.addEventListener('ended', function() {
-                        $(video).hide();
-                        $('#refinery-poster').fadeIn(1400);
-                })
-                     */
-                </script>
-
                 <a href="#" id="btn-showsite"><img style="display:block;" src="images/btn_goToSite.jpg" /></a>
             </section>
 
@@ -1391,7 +1376,7 @@
                     $("#login-dropdown, #employee-login").click(function() { return false; })
 				
                     // login hover
-                    $('#header-inner').find("#login-dropdown").hover( function() {
+                    $('#header-inner.active').find("#login-dropdown").live('hover', function() {
                         $(this).next().fadeIn('fast').show();
 
                         $(this).parent().hover( function() {
@@ -1404,8 +1389,7 @@
                     });
 
                     //employee-login
-                               
-                    $('#header-inner').find("#employee-login").hover( function() {
+                    $('#header-inner.active').find("#employee-login").live('hover', function() {
                         $(this).next().fadeIn('fast').show();
 
                         $(this).parent().hover( function() {
