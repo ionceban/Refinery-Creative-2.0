@@ -540,8 +540,14 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		this._handleOverlayScrollbar();
 		
-		
-		$('#main-slider').bxSlider();
+		// overlay slide initializer
+		var overlay_slider = $('#main-slider').bxSlider({
+			infiniteLoop: false
+		});
+		// if the slider has less than 2 total slides
+		if(overlay_slider.getSlideCount() < 2) {
+			$('.bx-prev, .bx-next').hide();
+		}
 		
 		$('#other-wrapper .overlay-block ul a img').click(function(evt) {
 			evt.preventDefault();
