@@ -160,6 +160,13 @@ strong {
     background: url(../images/loading.gif) center center no-repeat;
 }
 
+#video-wrapper video {
+    border: none;
+}
+
+#no-video {
+    display: none;
+}
 
 #push-content {
 	min-height:450px;
