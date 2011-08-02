@@ -516,13 +516,14 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	},
 	
 	_getOverlayContent: function(category, project_id, image_id) {
-		cl(category, project_id, image_id)
+		cl(category, image_id)
+		
 		
 		var self = this;
 		$.ajax({
 			url:  'backend/get_overlay.php',
 			type: 'POST',
-			data: { category: category, project_id: project_id, image_id: image_id },
+			data: { category: category, image_id: image_id },
 			success: function(data) {
 				self._populateOverlay(data);
 				self._openOverlay();
@@ -563,45 +564,22 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		// hide the prev arrow on init
 		$('.bx-prev').hide();
 		
-		$('#other-wrapper .overlay-block ul a img').click(function(evt) {
+		
+		$('.overlay-block ul a img').click(function(evt){
 			evt.preventDefault();
 			var overlay_attrs = $(this).attr('class').split('_');
-			var ajax_overlay = new XMLHttpRequest();
-			ajax_overlay.open("POST", "backend/get_overlay.php", true);
-			ajax_overlay.onreadystatechange = function(){
-				if (ajax_overlay.readyState == 4 && ajax_overlay.status==200){
-					big_thing._populateOverlay(ajax_overlay.responseText);
+			$.ajax({
+				url: "backend/get_overlay.php",
+				cache: false,
+				type: "POST",
+				data: {category: overlay_attrs[0], image_id: overlay_attrs[1]},
+				success: function(data){
+					big_thing._populateOverlay(data);
 				}
-			}
-			ajax_overlay.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-			ajax_overlay.send('category=' + overlay_attrs[0] + '&project_id=' + overlay_attrs[1] + '&image_id=' + overlay_attrs[2]);
+			});
 		});
 		
-		$('#tv-spots .overlay-block ul img').click(function(){
-			var overlay_attrs = $(this).attr('class').split('_');
-			var ajax_overlay = new XMLHttpRequest();
-			ajax_overlay.open("POST", "backend/get_overlay.php", true);
-			ajax_overlay.onreadystatechange = function(){
-				if (ajax_overlay.readyState == 4 && ajax_overlay.status==200){
-					big_thing._populateOverlay(ajax_overlay.responseText);
-				}
-			}
-			ajax_overlay.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-			ajax_overlay.send('category=' + overlay_attrs[0] + '&project_id=' + overlay_attrs[1] + '&image_id=' + overlay_attrs[2]);
-		});
 		
-		$('#banner .overlay-block ul img').click(function(){
-			var overlay_attrs = $(this).attr('class').split('_');
-			var ajax_overlay = new XMLHttpRequest();
-			ajax_overlay.open("POST", "backend/get_overlay.php", true);
-			ajax_overlay.onreadystatechange = function(){
-				if (ajax_overlay.readyState == 4 && ajax_overlay.status==200){
-					big_thing._populateOverlay(ajax_overlay.responseText);
-				}
-			}
-			ajax_overlay.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-			ajax_overlay.send('category=' + overlay_attrs[0] + '&project_id=' + overlay_attrs[1] + '&image_id=' + overlay_attrs[2]);
-		});
 	},
 	
 	_openOverlay: function() {

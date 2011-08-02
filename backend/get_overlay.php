@@ -1,87 +1,70 @@
 <?php
 	require('config.php');
 	require('db_connect.php');
-	require('db_utils.php');
+	require('utils.php');
+	
+	$category = $_POST['category'];
+	$image_id = $_POST['image_id'];
+	
+	$query_statement = "SELECT projects.id,projects.name FROM images,projects WHERE ";
+	$query_statement .= "(images.id='" . $image_id . "' AND images.project_id=projects.id)";
+	$query = mysql_query($query_statement, $db_conn);
+	$row = mysql_fetch_row($query);
+	
+	$project_id = $row[0];
+	$project_name = $row[1];
 	
 	function get_images($project_id, $medium_id, $db_conn){
-		$query_statement_2 = "SELECT name FROM mediums WHERE id='" . $medium_id . "'";
-		$query_2 = mysql_query($query_statement_2, $db_conn);
-		$row_2 = mysql_fetch_array($query_2);
+		$query_statement = "SELECT images.id,images.name FROM images,mediscs WHERE ";
+		$query_statement .= "(images.medisc_id=mediscs.id AND mediscs.medium_id='" . $medium_id . "'";
+		$query_statement .= " AND images.project_id='" . $project_id . "')";
+		$query = mysql_query($query_statement, $db_conn);
 		
-		$global_category_name = $row_2['name'];
-		
-		$query_statement_2 = "SELECT * FROM mediscs WHERE medium_id='" . $medium_id . "'";
-		$query_2 = mysql_query($query_statement_2, $db_conn);
-		$query_array_2 = array();
-		
-		while ($row_2 = mysql_fetch_array($query_2)){
-			array_push($query_array_2, "medisc_id='" . $row_2['id'] . "'");
+		$response = array();
+		$response[0] = 0;
+		$response['id'] = array();
+		$response['name'] = array();
+		while ($row = mysql_fetch_row($query)){
+			$response[0]++;
+			$response['id'][$response[0]] = $row[0];
+			$response['name'][$response[0]] = $row[1];
 		}
 		
-		$result = array();
-		$result[0] = 0;
-		$result['id'] = array();
-		$result['name'] = array();
-		
-		$query_statement_2 = "SELECT * FROM images WHERE (project_id='" . $project_id ."' AND " . get_list($query_array_2, " OR ") . ")";
-		$query_2 = mysql_query($query_statement_2, $db_conn);
-		
-		while ($row_2 = mysql_fetch_array($query_2)){
-			$result[0]++;
-			$result['class_attr'][$result[0]] = $global_category_name . "_" . $project_id . "_" . $row_2['id'];
-			$result['id'][$result[0]] = $row_2['id'];
-			$result['name'][$result[0]] = $row_2['name'];
-		}
-		
-		return $result;
+		return $response;
 	}
-	
 	
 	$mediums = array();
 	$mediums[0] = 0;
 	$mediums['name'] = array();
 	$mediums['id'] = array();
 	
-	$query_statement = "SELECT * FROM mediums WHERE name='" . $_POST['category'] . "'";
+	$query_statement = "SELECT id,name FROM mediums WHERE name='" . $category . "'";
 	$query = mysql_query($query_statement, $db_conn);
-	while($row = mysql_fetch_array($query)){
+	while($row = mysql_fetch_row($query)){
 		$mediums[0]++;
-		$mediums['name'][$mediums[0]] = $row['name'];
-		$mediums['id'][$mediums[0]] = $row['id'];
+		$mediums['name'][$mediums[0]] = $row[1];
+		$mediums['id'][$mediums[0]] = $row[0];
 	} 
 	
-	$query_statement = "SELECT * FROM mediums WHERE name!='" . $_POST['category'] . "'";
+	$query_statement = "SELECT id,name FROM mediums WHERE name!='" . $category . "'";
 	$query = mysql_query($query_statement, $db_conn);
-	while ($row = mysql_fetch_array($query)){
+	while ($row = mysql_fetch_row($query)){
 		$mediums[0]++;
-		$mediums['name'][$mediums[0]] = $row['name'];
-		$mediums['id'][$mediums[0]] = $row['id'];
+		$mediums['name'][$mediums[0]] = $row[1];
+		$mediums['id'][$mediums[0]] = $row[0];
 	}
 	
 	
 	$response .= '<div id="overlay-left">';
 	$response .= '<div id="overlay-left-content">';
 	
-	$query_statement_2 = "SELECT name FROM projects WHERE id='" . $_POST['project_id'] . "'";
-	$query_2 = mysql_query($query_statement_2);
-	$row_2 = mysql_fetch_array($query_2);
-	
-	$GLOBAL_PROJECT = $row_2['name'];
-	
-	$image_array = get_images($_POST['project_id'], $mediums['id'][1], $db_conn);
+	$image_array = get_images($project_id, $mediums['id'][1], $db_conn);
 	
 	if ($image_array[0] > 1){
 	
-		$response .= '<div id="other-wrapper">';
+		$response .= '<div id="other-'. $mediums['name'][1] . '">';
 		$response .= '<div class="overlay-block">';
-		$response .= '<h1>other ';
-		
-		$query_statement_2 = "SELECT name FROM projects WHERE id='" . $_POST['project_id'] . "'";
-		$query_2 = mysql_query($query_statement_2);
-		$row_2 = mysql_fetch_array($query_2);
-		
-		$response .= $row_2['name'] . "</h1>";
-		
+		$response .= '<h1>other ' . $mediums['name'][1] . '</h1>';
 		$response .= '<ul class="overlay-list clearfix">';
 		
 		for ($i = 1; $i <= $image_array[0]; $i++){
@@ -89,8 +72,16 @@
 				$response .= '<li>';
 				$response .= "<a href='#'>";
 				$response .= "<div class='img-container'>";
-				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] . "</h5></span>";
+				
+				$class_attr = $mediums['name'][1] . "_" . $image_array['id'][$i];
+				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
+				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
+				$thumber_ext = extension_checker($thumber_body);
+				$list_body = $file_attrs[0] . "_t_list";
+				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
+				
+				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
 				$response .= "</div>";
 				$response .= "</a>";
 				$response .= '</li>';
@@ -103,79 +94,114 @@
 		$response .= '</div>';
 	}
 	
-	$image_array = get_images($_POST['project_id'], $mediums['id'][2], $db_conn);
-	if ($image_array[0] >0){
-		$response .= '<div id="tv-spots">';
+	$image_array = get_images($project_id, $mediums['id'][2], $db_conn);
+	
+	if ($image_array[0] > 0){
+	
+		$response .= '<div id="other-'. $mediums['name'][2] . '">';
 		$response .= '<div class="overlay-block">';
-		$response .= '<h1>' . $mediums['name'][2] . '</h1>';
+		$response .= '<h1>other ' . $mediums['name'][2] . '</h1>';
 		$response .= '<ul class="overlay-list clearfix">';
-		
 		
 		for ($i = 1; $i <= $image_array[0]; $i++){
 			if ($image_array['id'][$i] != $_POST['image_id']){
 				$response .= '<li>';
+				$response .= "<a href='#'>";
 				$response .= "<div class='img-container'>";
-				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
+				
+				$class_attr = $mediums['name'][2] . "_" . $image_array['id'][$i];
+				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
+				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
+				$thumber_ext = extension_checker($thumber_body);
+				$list_body = $file_attrs[0] . "_t_list";
+				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
+				
+				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
 				$response .= "</div>";
+				$response .= "</a>";
 				$response .= '</li>';
 			}
-		}
-		
+		}	
+	
 		
 		$response .= '</ul>';
 		$response .= '</div>';
 		$response .= '</div>';
 	}
 	
-	$image_array = get_images($_POST['project_id'], $mediums['id'][3], $db_conn);
+	$image_array = get_images($project_id, $mediums['id'][3], $db_conn);
+	
 	if ($image_array[0] > 0){
-		$response .= '<div id="banner">';
+	
+		$response .= '<div id="other-'. $mediums['name'][3] . '">';
 		$response .= '<div class="overlay-block">';
-		$response .= '<h1>' . $mediums['name'][3] . '</h1>';
+		$response .= '<h1>other ' . $mediums['name'][3] . '</h1>';
 		$response .= '<ul class="overlay-list clearfix">';
-		
-		
 		
 		for ($i = 1; $i <= $image_array[0]; $i++){
 			if ($image_array['id'][$i] != $_POST['image_id']){
 				$response .= '<li>';
+				$response .= "<a href='#'>";
 				$response .= "<div class='img-container'>";
-				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
+				
+				$class_attr = $mediums['name'][3] . "_" . $image_array['id'][$i];
+				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
+				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
+				$thumber_ext = extension_checker($thumber_body);
+				$list_body = $file_attrs[0] . "_t_list";
+				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
+				
+				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
 				$response .= "</div>";
+				$response .= "</a>";
 				$response .= '</li>';
 			}
-		}
+		}	
+	
 		
 		$response .= '</ul>';
 		$response .= '</div>';
 		$response .= '</div>';
 	}
-	$image_array = get_images($_POST['project_id'], $mediums['id'][4], $db_conn);
+	
+	$image_array = get_images($project_id, $mediums['id'][4], $db_conn);
+	
 	if ($image_array[0] > 0){
-		$response .= '<div id="med4">';
+	
+		$response .= '<div id="other-'. $mediums['name'][4] . '">';
 		$response .= '<div class="overlay-block">';
-		$response .= '<h1>' . $mediums['name'][4] . '</h1>';
+		$response .= '<h1>other ' . $mediums['name'][4] . '</h1>';
 		$response .= '<ul class="overlay-list clearfix">';
-		
-		
 		
 		for ($i = 1; $i <= $image_array[0]; $i++){
 			if ($image_array['id'][$i] != $_POST['image_id']){
 				$response .= '<li>';
+				$response .= "<a href='#'>";
 				$response .= "<div class='img-container'>";
-				$response .= "<img class='" . $image_array['class_attr'][$i] . "' style='height:100px; width:70px' src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $GLOBAL_PROJECT . "-" . $image_array['name'][$i] .  "</h5></span>";
+				
+				$class_attr = $mediums['name'][4] . "_" . $image_array['id'][$i];
+				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
+				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
+				$thumber_ext = extension_checker($thumber_body);
+				$list_body = $file_attrs[0] . "_t_list";
+				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
+				
+				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
+				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
 				$response .= "</div>";
+				$response .= "</a>";
 				$response .= '</li>';
 			}
-		}
+		}	
+	
 		
 		$response .= '</ul>';
 		$response .= '</div>';
 		$response .= '</div>';
 	}
+	
 	$response .= '<div id="related work">';
 	$response .= '<div class="overlay-block">';
 	$response .= '<h1>related work</h1>';
@@ -193,25 +219,21 @@
 	$response .= '</ul>';
 	$response .= '</div>';
 	$response .= '</div>';
-	$response .= '<div id="share-wrapper">';
-	$response .= '<div class="overlay-block">';
-	$response .= '</div>';
-	$response .= '</div>';
 	$response .= '</div>';
 	$response .= '</div>';
 	$response .= '<div id="overlay-content">';
 	$response .= '<div id="slider-wrapper">';
 	$response .= '<ul id="main-slider">';
 	
-	$query_statement = "SELECT * FROM images WHERE id='" . $_POST['image_id'] . "'";
+	$query_statement = "SELECT id,name FROM images WHERE id='" . $_POST['image_id'] . "'";
 	$query = mysql_query($query_statement, $db_conn);
-	$row = mysql_fetch_array($query);
+	$row = mysql_fetch_row($query);
 	
-	$response .= '<li><img src="' . $PROJS_PATH . $row['name'] . '" /></li>'; 
-	//$response .= "<li>" . $_POST['image_id'] . "</li>";
-	$image_array = get_images($_POST['project_id'], $mediums['id'][1], $db_conn); 
+	$response .= '<li><img src="' . $PROJS_PATH . $row[1] . '" /></li>'; 
+	
+	$image_array = get_images($project_id, $mediums['id'][1], $db_conn); 
 	for ($i = 1; $i <= $image_array[0]; $i++){
-		if ($image_array['id'][$i] != $_POST['image_id']){
+		if ($image_array['id'][$i] != $image_id){
 			$response .= "<li>";
 			$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
 			$response .= "</li>";
