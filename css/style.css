@@ -828,12 +828,34 @@ strong {
 }
 .overlay-list li {
     float: left;
-    margin: 0 3px 3px 0;
+	padding-right:3px;
+    margin: 0 0 3px 0;
+	width:40px;
 }
 .overlay-list a {
     display: block;
     float: left;
 }
+#other-interactive .slider-wrapper-other {
+	position:relative;
+	padding:0 10px;
+}
+	#other-interactive .slider-wrapper-other .bx-prev {
+		position:absolute;
+		left:-10px;
+		top:30px;
+		width:6px;
+		height:15px;
+		background:url(../images/slider-other-left.jpg) no-repeat 0 0;
+	}
+	#other-interactive .slider-wrapper-other .bx-next {
+		position:absolute;
+		right:-10px;
+		top:30px;
+		width:6px;
+		height:15px;
+		background:url(../images/slider-other-right.jpg) no-repeat 0 0;
+	}
 #overlay-left img {
     border: 1px solid #313234;
 }
