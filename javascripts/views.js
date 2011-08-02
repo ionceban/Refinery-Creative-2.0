@@ -550,7 +550,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		});
 		
 		
-		
 		// overlay slide initializer
 		var overlay_slider = $('#main-slider').bxSlider({
 			infiniteLoop: false,
@@ -644,7 +643,8 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		$('.img-container img').mouseleave(function(){
 			$(this).parent().find('.tooltip').css('display', 'none');
 			$(this).parent().find('.tooltip').css('top', '-20px');
-			$(this).css('opacity', '0.5');
+			if($(this).parents('#other-print').length < 1)
+				$(this).css('opacity', '0.5');
 		});
 		
 		$('.img-container .tooltip').mouseenter(function(event){
@@ -657,8 +657,8 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		$('.img-container .tooltip').mouseleave(function(event){
 			$(this).css('display', 'none');
 			$(this).css('top', '-20px');
-			$(this).parent().find('img').css('opacity', '0.5');
-			
+			if($(this).parents('#other-print').length < 1)
+				$(this).parent().find('img').css('opacity', '0.5');
 		});
 	}
 	
