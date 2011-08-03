@@ -180,6 +180,10 @@ strong {
     width: 970px;
     z-index: 2;
 }
+.section-dynamic-content {
+	padding-top: 10px;
+}
+
 .section-dynamic-content a {
     background-color: #e5e5e5;
     display: block;
@@ -596,7 +600,6 @@ strong {
     padding: 27px 0 0 0;
 }
 #av-list {
-    margin-top: 10px;
     overflow: hidden;
     width: 970px;
 }
@@ -622,7 +625,6 @@ strong {
 }
 #print-list {
     overflow: hidden;
-    padding-top: 10px;
     width: 970px;
 }
 .print-item-block {
