@@ -1083,3 +1083,7 @@ strong {
 #careers-overlay p {
     margin: 0 0 15px 0;
 }
+
+#no-video{
+	display: none;
+}

@@ -58,148 +58,49 @@
 	$response .= '<div id="overlay-left">';
 	$response .= '<div id="overlay-left-content">';
 	
-	$image_array = get_images($project_id, $mediums['id'][1], $db_conn);
-	
-	if ($image_array[0] > 1){
-	
-		$response .= '<div id="other-'. $mediums['name'][1] . '">';
-		$response .= '<div class="overlay-block">';
-		$response .= '<h1>other ' . $mediums['name'][1] . '</h1>';
-		$response .= '<ul class="overlay-list clearfix">';
+	for ($j = 1; $j < 4; $j++){
 		
-		for ($i = 1; $i <= $image_array[0]; $i++){
-			if ($image_array['id'][$i] != $_POST['image_id']){
-				$response .= '<li>';
-				$response .= "<a href='#'>";
-				$response .= "<div class='img-container'>";
-				
-				$class_attr = $mediums['name'][1] . "_" . $image_array['id'][$i];
-				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
-				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
-				$thumber_ext = extension_checker($thumber_body);
-				$list_body = $file_attrs[0] . "_t_list";
-				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
-				
-				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
-				$response .= "</div>";
-				$response .= "</a>";
-				$response .= '</li>';
-			}
-		}	
-	
+		$image_array = get_images($project_id, $mediums['id'][$j], $db_conn);
 		
-		$response .= '</ul>';
-		$response .= '</div>';
-		$response .= '</div>';
-	}
-	
-	$image_array = get_images($project_id, $mediums['id'][2], $db_conn);
-	
-	if ($image_array[0] > 0){
-	
-		$response .= '<div id="other-'. $mediums['name'][2] . '">';
-		$response .= '<div class="overlay-block">';
-		$response .= '<h1>other ' . $mediums['name'][2] . '</h1>';
-		$response .= '<ul class="overlay-list clearfix">';
+		if ($j == 1){
+			$limit = 1;
+		} else {
+			$limit = 0;
+		}
 		
-		for ($i = 1; $i <= $image_array[0]; $i++){
-			if ($image_array['id'][$i] != $_POST['image_id']){
-				$response .= '<li>';
-				$response .= "<a href='#'>";
-				$response .= "<div class='img-container'>";
-				
-				$class_attr = $mediums['name'][2] . "_" . $image_array['id'][$i];
-				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
-				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
-				$thumber_ext = extension_checker($thumber_body);
-				$list_body = $file_attrs[0] . "_t_list";
-				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
-				
-				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
-				$response .= "</div>";
-				$response .= "</a>";
-				$response .= '</li>';
-			}
-		}	
-	
+		if ($image_array[0] > $limit){
 		
-		$response .= '</ul>';
-		$response .= '</div>';
-		$response .= '</div>';
-	}
-	
-	$image_array = get_images($project_id, $mediums['id'][3], $db_conn);
-	
-	if ($image_array[0] > 0){
-	
-		$response .= '<div id="other-'. $mediums['name'][3] . '">';
-		$response .= '<div class="overlay-block">';
-		$response .= '<h1>other ' . $mediums['name'][3] . '</h1>';
-		$response .= '<ul class="overlay-list clearfix">';
+			$response .= '<div id="other-'. $mediums['name'][$j] . '">';
+			$response .= '<div class="overlay-block">';
+			$response .= '<h1>other ' . $mediums['name'][$j] . '</h1>';
+			$response .= '<ul class="overlay-list clearfix">';
+			
+			for ($i = 1; $i <= $image_array[0]; $i++){
+				if ($image_array['id'][$i] != $_POST['image_id']){
+					$response .= '<li>';
+					$response .= "<a href='#'>";
+					$response .= "<div class='img-container'>";
+					
+					$class_attr = $mediums['name'][$j] . "_" . $image_array['id'][$i];
+					$file_attrs = preg_split('/\./', $image_array['name'][$i]);
+					$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
+					$thumber_ext = extension_checker($thumber_body);
+					$list_body = $file_attrs[0] . "_t_list";
+					$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
+					
+					$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
+					$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
+					$response .= "</div>";
+					$response .= "</a>";
+					$response .= '</li>';
+				}
+			}	
 		
-		for ($i = 1; $i <= $image_array[0]; $i++){
-			if ($image_array['id'][$i] != $_POST['image_id']){
-				$response .= '<li>';
-				$response .= "<a href='#'>";
-				$response .= "<div class='img-container'>";
-				
-				$class_attr = $mediums['name'][3] . "_" . $image_array['id'][$i];
-				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
-				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
-				$thumber_ext = extension_checker($thumber_body);
-				$list_body = $file_attrs[0] . "_t_list";
-				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
-				
-				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
-				$response .= "</div>";
-				$response .= "</a>";
-				$response .= '</li>';
-			}
-		}	
-	
-		
-		$response .= '</ul>';
-		$response .= '</div>';
-		$response .= '</div>';
-	}
-	
-	$image_array = get_images($project_id, $mediums['id'][4], $db_conn);
-	
-	if ($image_array[0] > 0){
-	
-		$response .= '<div id="other-'. $mediums['name'][4] . '">';
-		$response .= '<div class="overlay-block">';
-		$response .= '<h1>other ' . $mediums['name'][4] . '</h1>';
-		$response .= '<ul class="overlay-list clearfix">';
-		
-		for ($i = 1; $i <= $image_array[0]; $i++){
-			if ($image_array['id'][$i] != $_POST['image_id']){
-				$response .= '<li>';
-				$response .= "<a href='#'>";
-				$response .= "<div class='img-container'>";
-				
-				$class_attr = $mediums['name'][4] . "_" . $image_array['id'][$i];
-				$file_attrs = preg_split('/\./', $image_array['name'][$i]);
-				$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
-				$thumber_ext = extension_checker($thumber_body);
-				$list_body = $file_attrs[0] . "_t_list";
-				$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
-				
-				$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
-				$response .= "<span class='tooltip'><h5>" . $project_name . "</h5></span>";
-				$response .= "</div>";
-				$response .= "</a>";
-				$response .= '</li>';
-			}
-		}	
-	
-		
-		$response .= '</ul>';
-		$response .= '</div>';
-		$response .= '</div>';
+			
+			$response .= '</ul>';
+			$response .= '</div>';
+			$response .= '</div>';
+		}
 	}
 	
 	$response .= '<div id="related work">';
@@ -229,13 +130,32 @@
 	$query = mysql_query($query_statement, $db_conn);
 	$row = mysql_fetch_row($query);
 	
-	$response .= '<li><img src="' . $PROJS_PATH . $row[1] . '" /></li>'; 
+	$response .= "<li>";
+	if ($mediums['name'][1] == 'print' || $mediums['name'][1] == 'interactive'){
+		$response .= "<img src='" . $PROJS_PATH . $row[1] . "' />";
+	} else {
+		$response .= "<div class='video-container' style='max-width: 598; max-height: 325'>";
+		$response .= "<video controls>";
+		$response .= "<source src='" . $PROJS_PATH . $row[1] . "' type='video/ogg' />";
+		$response .= "</video>";
+		$response .= "</div>";
+	}
+	$response .= "</li>";
 	
 	$image_array = get_images($project_id, $mediums['id'][1], $db_conn); 
 	for ($i = 1; $i <= $image_array[0]; $i++){
 		if ($image_array['id'][$i] != $image_id){
 			$response .= "<li>";
-			$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' />"; 
+			if ($mediums['name'][1] == 'print' || $mediums['name'][1] == 'interactive'){
+				$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' />";
+			} else {
+				$response .= "<div class='video-container' style='width: 598px; height: 325px'>";
+				$response .= "<video controls>";
+				$response .= "<source src='" . $PROJS_PATH  . $image_array['name'][$i] . "' ";
+				$response .= "type='video/ogg' />";
+				$response .= "</video>";
+				$response .= "</div>";
+			}
 			$response .= "</li>";
 		}
 	}	
