@@ -541,11 +541,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		this._handleOverlayScrollbar();
 		
-		setTimeout(function(){
-			big_thing._handleOverlayVideoSize();
-		}, 2000);
-		
-		
 		// overlay other slider
 		var other_slider = $('#other-slider').bxSlider({
 			infiniteLoop: false,
@@ -663,30 +658,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			$(this).css('top', '-20px');
 			if($(this).parents('#other-print').length < 1)
 				$(this).parent().find('img').css('opacity', '0.5');
-		});
-	},
-	
-	_handleOverlayVideoSize: function(){
-		$('#overlay video').each(function(){
-			var current_width = parseInt($(this).css('width').split('px')[0]);
-			var current_height = parseInt($(this).css('height').split('px')[0]);
-			
-			if (current_width > 400){
-				var old_width = parseFloat(current_width);
-				var old_height = parseFloat(current_height);
-				current_width = 400;
-				current_height = Math.floor((parseFloat(current_width) * old_height) / old_width);
-			}
-			
-			if (current_height > 500){
-				var old_width = parseFloat(current_width);
-				var old_height = parseFloat(current_height);
-				current_height = 500;
-				current_width = Math.floor((parseFloat(current_height) * old_width) / old_height);
-			}
-			
-			$(this).css('width', '' + current_width + 'px');
-			$(this).css('height', '' + current_height + 'px');
 		});
 	}
 	
