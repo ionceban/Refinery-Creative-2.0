@@ -533,6 +533,12 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	
 	_populateOverlay: function(overlay_content){
 		
+		var cHeight = $(window).height();
+		var cWidth = parseInt($(window).width());
+		var remainingWidth = cWidth - 1124;
+		var marginLeft = parseInt(remainingWidth / 2);
+		$('#slider-wrapper').css('margin-left', marginLeft + 'px');
+		
 		var big_thing = this;
 		
 		$('#overlay').html(overlay_content);
@@ -600,6 +606,12 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				$(window).unbind("mousewheel");
 			}
 		});
+		
+		var cHeight = $(window).height();
+		var cWidth = parseInt($(window).width());
+		var remainingWidth = cWidth - 1124;
+		var marginLeft = parseInt(remainingWidth / 2);
+		$('#slider-wrapper').css('margin-left', marginLeft + 'px');
 		
 		
 		$('#close-button').click( function() {
