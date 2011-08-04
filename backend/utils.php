@@ -126,7 +126,7 @@
 		return $query_statement;
 	}
 
-	function get_three_keyws($image_id, $db_conn){
+	function get_number_keyws($image_id, $db_conn, $low_limit, $up_limit){
 		$query_statement = "SELECT keyword_id FROM imgkeyws WHERE image_id='" . $image_id . "'";
 		$query = mysql_query($query_statement, $db_conn);
 		
@@ -140,7 +140,7 @@
 		$response == array();
 		$response[0] = 0;
 		
-		if ($keyw_arr[0] < 2){
+		if ($keyw_arr[0] < $low_limit){
 			return $response;
 		}
 		
@@ -162,7 +162,7 @@
 		}
 		
 		foreach ($partial as $elem){
-			if (intval($elem['occ']) >= 2){
+			if (intval($elem['occ']) >= $low_limit && intval($elem['occ']) <= $up_limit){
 				$response[0]++;
 				$response[$response[0]] = $elem['image_id'];
 			}
