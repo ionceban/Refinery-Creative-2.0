@@ -537,6 +537,10 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		$('#overlay').html(overlay_content);
 		
+		//VideoJS.setupAllWhenReady();
+		
+		setTimeout("$('#overlay video').VideoJS()", 1000);
+		
 		this._handleOverlayHovers();
 		
 		this._handleOverlayScrollbar();

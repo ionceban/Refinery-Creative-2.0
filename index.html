@@ -17,6 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
 		<!-- styles needed by jScrollPane -->
 		<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+		<link type="text/css" href="video-js.css" rel="stylesheet" media="screen" title="Video JS" charset="utf-8" />
 	</head>
 	<body>
 		<!--<div id="container" class="intro">-->
@@ -1182,6 +1183,7 @@
 			<script type="text/javascript" src="javascripts/sectionize.js"></script>
 			<script type="text/javascript" src="javascripts/application.js"></script>
 			<script type="text/javascript" src="javascripts/jquery.form.js"></script>
+			<script type="text/javascript" src="video.js"></script>
 			<script>
 				$(function() {
 					// test browser support for html5 video
@@ -1258,6 +1260,20 @@
 						beforeSubmit : validateFields,
 						success : showMailResponse
 					});
+					
+					var cHeight = $(window).height();
+					var cWidth = parseInt($(window).width());
+					var remainingWidth = cWidth - 1124;
+					var marginLeft = parseInt(remainingWidth / 2);
+					$('#slider-wrapper').css('margin-left', marginLeft + 'px');
+				});
+				
+				$(window).resize(function(){
+					var cHeight = $(window).height();
+					var cWidth = parseInt($(window).width());
+					var remainingWidth = cWidth - 1124;
+					var marginLeft = parseInt(remainingWidth / 2);
+					$('#slider-wrapper').css('margin-left', marginLeft + 'px');
 				});
 
 			</script>
