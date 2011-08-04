@@ -125,4 +125,49 @@
 		
 		return $query_statement;
 	}
+
+	function get_three_keyws($image_id, $db_conn){
+		$query_statement = "SELECT keyword_id FROM imgkeyws WHERE image_id='" . $image_id . "'";
+		$query = mysql_query($query_statement, $db_conn);
+		
+		$keyw_arr = array();
+		$keyw_arr[0] = 0;
+		while ($row = mysql_fetch_row($query)){
+			++$keyw_arr[0];
+			$keyw_arr[$keyw_arr[0]] = $row[0];
+		}
+		
+		$response == array();
+		$response[0] = 0;
+		
+		if ($keyw_arr[0] < 2){
+			return $response;
+		}
+		
+		$partial = array();
+		
+		for ($i = 1; $i <= $keyw_arr[0]; $i++){
+			$query_statement = "SELECT image_id FROM imgkeyws WHERE (keyword_id='" . $keyw_arr[$i] . "' AND image_id";
+			$query_statement .= "!='" . $image_id . "')";
+			$query = mysql_query($query_statement, $db_conn);
+			
+			while ($row = mysql_fetch_row($query)){
+				if ($partial[$row[0]]['image_id']){
+					$partial[$row[0]]['occ']++;
+				} else {
+					$partial[$row[0]]['image_id'] = $row[0];
+					$partial[$row[0]]['occ'] = 1;
+				}
+			}
+		}
+		
+		foreach ($partial as $elem){
+			if (intval($elem['occ']) >= 2){
+				$response[0]++;
+				$response[$response[0]] = $elem['image_id'];
+			}
+		}
+		
+		return $response;
+	}
 ?>

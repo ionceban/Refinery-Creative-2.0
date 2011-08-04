@@ -545,8 +545,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		var marginLeft = parseInt(remainingWidth / 2);
 		$('#slider-wrapper').css('margin-left', marginLeft + 'px');
 		
-		//VideoJS.setupAllWhenReady();
-		
 		setTimeout("$('#overlay video').VideoJS()", 1000);
 		
 		this._handleOverlayHovers();
