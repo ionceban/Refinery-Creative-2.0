@@ -921,15 +921,15 @@ strong {
     width: 40px;
 }
 #slider-wrapper {
-    margin: 0 0 0 200px;
+    margin: 0 0 0 100px;
     position: relative;
-    width: 400px;
+    width: 600px;
 }
 #slider-wrapper ul li {
     float: left;
     height: 500px;
     overflow: hidden;
-    width: 400px;
+    width: 600px;
 }
 #slider-wrapper ul li img {
     display: block;
@@ -940,14 +940,14 @@ strong {
     background: url(../images/arrow-next.png) no-repeat;
     display: block;
     height: 219px;
-    right: -148px;
+    right: -100px;
     width: 46px;
 }
 .bx-prev {
     background: url(../images/arrow-prev.png) no-repeat;
     display: block;
     height: 219px;
-    left: -148px;
+    left: -100px;
     width: 46px;
 }
 .bx-next, .bx-prev {

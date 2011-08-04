@@ -54,7 +54,6 @@
 		$mediums['id'][$mediums[0]] = $row[0];
 	}
 	
-	
 	$response .= '<div id="overlay-left">';
 	$response .= '<div id="overlay-left-content">';
 	
@@ -135,9 +134,11 @@
 		$response .= "<img src='" . $PROJS_PATH . $row[1] . "' />";
 	} else {
 		$response .= "<div class='video-container' style='max-width: 598; max-height: 325'>";
-		$response .= "<video controls>";
+		$response .= "<div class='video-js-box'>";
+		$response .= "<video class='video-js' height='470' width=600' controls preload>";
 		$response .= "<source src='" . $PROJS_PATH . $row[1] . "' type='video/ogg' />";
 		$response .= "</video>";
+		$response .= "</div>";
 		$response .= "</div>";
 	}
 	$response .= "</li>";
@@ -150,10 +151,12 @@
 				$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' />";
 			} else {
 				$response .= "<div class='video-container' style='width: 598px; height: 325px'>";
-				$response .= "<video controls>";
+				$response .= "<div class='video-js-box'>";
+				$response .= "<video  height='470' width='600' class='video-js' controls preload>";
 				$response .= "<source src='" . $PROJS_PATH  . $image_array['name'][$i] . "' ";
 				$response .= "type='video/ogg' />";
 				$response .= "</video>";
+				$response .= "</div>";
 				$response .= "</div>";
 			}
 			$response .= "</li>";
