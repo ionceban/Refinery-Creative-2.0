@@ -57,7 +57,7 @@
 	$response .= '<div id="overlay-left">';
 	$response .= '<div id="overlay-left-content">';
 	
-	for ($j = 1; $j < 4; $j++){
+	for ($j = 1; $j <= 4; $j++){
 		
 		$image_array = get_images($project_id, $mediums['id'][$j], $db_conn);
 		
@@ -106,72 +106,19 @@
 	$response .= '<div class="overlay-block">';
 	$response .= '<h1>related work</h1>';
 	$response .= '<ul class="overlay-list clearfix">';
-	/*$response .= '<li>';
-	$response .= '<img src="images/related.jpg" />';
-	$response .= '<img src="images/related-2.jpg" />';
-	$response .= '<img src="images/related-2.jpg" />';
-	$response .= '</li>';
-	$response .= '<li>';
-	$response .= '<img src="images/related.jpg" />';
-	$response .= '<img src="images/related-2.jpg" />';
-	$response .= '<img src="images/related-2.jpg" />';
-	$response .= '</li>';*/
 	
-	$related_arr = get_number_keyws($image_id, $db_conn, 3, 300);
+	// 3 or more keywords
+	$related_arr = get_number_keywords($image_id, $db_conn, 3, 300);
+	$response .= process_related_array($related_arr, $db_conn, $PROJS_PATH);
+
+	// 2 keywords
+	$related_arr = get_number_keywords($image_id, $db_conn, 2, 2);
+	$response .= process_related_array($related_arr, $db_conn, $PROJS_PATH);
 	
-	for ($i = 1; $i <= $related_arr[0]; $i++){
-		$query_statement = "SELECT images.name,mediums.name,projects.name FROM images,projects,mediums,mediscs WHERE";
-		$query_statement .= "(images.id='" . $related_arr[$i] . "' AND images.medisc_id=mediscs.id AND ";
-		$query_statement .= "mediscs.medium_id=mediums.id AND images.project_id=projects.id)";
-		
-		$query = mysql_query($query_statement, $db_conn);
-		$row = mysql_fetch_row($query);
-		
-		$class_attr = $row[1] . "_" . $related_arr[$i];
-		$file_attrs = preg_split('/\./', $row[0]);
-		$thumber_ext = extension_checker($PROJS_PATH . $file_attrs[0] . "_t_thumber");
-		$list_body = $file_attrs[0] . "_t_list";
-		$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
-		
-		$response .= "<li>";
-		$response .= "<a href='#'>";
-		$response .= "<div class='img-container'>";
-		$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
-		$response .= "<span class='tooltip'><h5>" . $row[2] . "</h5></span>";
-		$response .= "</div>";
-		$response .= "</a>";
-		$response .= "</li>";
-		
-		
-	}
+	// medium and 1 keyword
+	$related_arr = get_one_keyword_medium($image_id, $db_conn);
+	$response .= process_related_array($related_arr, $db_conn, $PROJS_PATH);
 	
-	$related_arr = get_number_keyws($image_id, $db_conn, 2, 2);
-	
-	for ($i = 1; $i <= $related_arr[0]; $i++){
-		$query_statement = "SELECT images.name,mediums.name,projects.name FROM images,projects,mediums,mediscs WHERE";
-		$query_statement .= "(images.id='" . $related_arr[$i] . "' AND images.medisc_id=mediscs.id AND ";
-		$query_statement .= "mediscs.medium_id=mediums.id AND images.project_id=projects.id)";
-		
-		$query = mysql_query($query_statement, $db_conn);
-		$row = mysql_fetch_row($query);
-		
-		$class_attr = $row[1] . "_" . $related_arr[$i];
-		$file_attrs = preg_split('/\./', $row[0]);
-		$thumber_ext = extension_checker($PROJS_PATH . $file_attrs[0] . "_t_thumber");
-		$list_body = $file_attrs[0] . "_t_list";
-		$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
-		
-		$response .= "<li>";
-		$response .= "<a href='#'>";
-		$response .= "<div class='img-container'>";
-		$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' />"; 
-		$response .= "<span class='tooltip'><h5>" . $row[2] . "</h5></span>";
-		$response .= "</div>";
-		$response .= "</a>";
-		$response .= "</li>";
-		
-		
-	}
 	
 	$response .= '</ul>';
 	$response .= '</div>';

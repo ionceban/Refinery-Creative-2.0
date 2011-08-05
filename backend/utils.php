@@ -126,7 +126,7 @@
 		return $query_statement;
 	}
 
-	function get_number_keyws($image_id, $db_conn, $low_limit, $up_limit){
+	function get_number_keywords($image_id, $db_conn, $low_limit, $up_limit){
 		$query_statement = "SELECT keyword_id FROM imgkeyws WHERE image_id='" . $image_id . "'";
 		$query = mysql_query($query_statement, $db_conn);
 		
@@ -166,6 +166,91 @@
 				$response[0]++;
 				$response[$response[0]] = $elem['image_id'];
 			}
+		}
+		
+		return $response;
+	}
+
+	function get_one_keyword_medium($image_id, $db_conn){
+		$query_statement = "SELECT mediums.id FROM images,mediscs,mediums WHERE (images.medisc_id=mediscs.id";
+		$query_statement .= " AND mediums.id=mediscs.medium_id AND images.id='" . $image_id . "')";
+		$query = mysql_query($query_statement, $db_conn);
+		$row = mysql_fetch_row($query);
+		
+		$medium_id = $row[0];
+		
+		$partial = array();
+		
+		$query_statement = "SELECT images.id FROM images,mediscs,mediums WHERE (images.medisc_id=mediscs.id";
+		$query_statement .= " AND mediums.id=mediscs.medium_id AND mediums.id='" . $medium_id . "'";
+		$query_statement .= " AND images.id!='" . $image_id . "')";
+		$query = mysql_query($query_statement, $db_conn);
+		
+		while ($row = mysql_fetch_row($query)){
+			if ($partial[$row[0]]['image_id']){
+				$partial[$row[0]]['occ']++;
+			} else {
+				$partial[$row[0]]['image_id'] = $row[0];
+				$partial[$row[0]]['occ'] = 1;
+			}
+		}
+		
+		$one_keyw_arr = get_number_keywords($image_id, $db_conn, 1, 1);
+		
+		for ($i = 1; $i <= $one_keyw_arr[0]; $i++){
+			if ($partial[$one_keyw_arr[$i]]['image_id']){
+				$partial[$one_keyw_arr[$i]]['occ']++;
+			} else {
+				$partial[$one_keyw_arr[$i]]['image_id'] = $one_keyw_arr[$i];
+				$partial[$one_keyw_arr[$i]]['occ'] = 1;
+			}
+		} 
+		
+		$response == array();
+		$response[0] = 0;
+		
+		foreach ($partial as $elem){
+			if (intval($elem['occ']) == 2){
+				$response[0]++;
+				$response[$response[0]] = $elem['image_id'];
+			}
+		}
+		
+		return $response;
+	}
+
+	function process_related_array($related_arr, $db_conn, $PROJS_PATH){
+			
+		$response = "";
+		
+		for ($i = 1; $i <= $related_arr[0]; $i++){
+			$query_statement = "SELECT images.name,mediums.name,projects.name FROM images,projects,mediums,mediscs WHERE";
+			$query_statement .= "(images.id='" . $related_arr[$i] . "' AND images.medisc_id=mediscs.id AND ";
+			$query_statement .= "mediscs.medium_id=mediums.id AND images.project_id=projects.id)";
+			
+			$query = mysql_query($query_statement, $db_conn);
+			$row = mysql_fetch_row($query);
+			
+			$class_attr = $row[1] . "_" . $related_arr[$i];
+			$file_attrs = preg_split('/\./', $row[0]);
+			$thumber_ext = extension_checker($PROJS_PATH . $file_attrs[0] . "_t_thumber");
+			$list_body = $file_attrs[0] . "_t_grid";
+			$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
+			
+			list($grid_width, $grid_height, $grid_src, $grid_attr) = getimagesize($src_attr);
+			
+			$height_constraint = 80;
+			$width_constraint = intval(($height_constraint * $grid_width) / $grid_height);
+			
+			$response .= "<li>";
+			$response .= "<a href='#'>";
+			$response .= "<div class='img-container'>";
+			$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' style='width:" . $width_constraint . "px; height:" . $height_constraint . "px' />"; 
+			$response .= "<span class='tooltip'><h5>" . $row[2] . "</h5></span>";
+			$response .= "</div>";
+			$response .= "</a>";
+			$response .= "</li>";
+			
 		}
 		
 		return $response;

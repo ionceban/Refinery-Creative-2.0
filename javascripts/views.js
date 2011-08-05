@@ -527,29 +527,27 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			success: function(data) {
 				self._populateOverlay(data);
 				self._openOverlay();
+				self._VideoJS();
 			}
 		});
 	},
 	
 	_populateOverlay: function(overlay_content){
 		
-		
-		
-		var big_thing = this;
+		var self = this;
 		
 		$('#overlay').html(overlay_content);
 		
-		var cHeight = $(window).height();
-		var cWidth = parseInt($(window).width());
-		var remainingWidth = cWidth - 1124;
-		var marginLeft = parseInt(remainingWidth / 2);
-		$('#slider-wrapper').css('margin-left', marginLeft + 'px');
 		
-		setTimeout("$('#overlay video').VideoJS()", 1000);
+		//setTimeout("$('#overlay video').VideoJS()", 1000);
 		
-		this._handleOverlayHovers();
+		//$('#overlay video').VideoJS();
 		
-		this._handleOverlayScrollbar();
+		self._adjustOverlayPosition();
+		
+		self._handleOverlayHovers();
+		
+		self._handleOverlayScrollbar();
 		
 		// overlay other slider
 		var other_slider = $('#other-slider').bxSlider({
@@ -576,7 +574,8 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				type: "POST",
 				data: {category: overlay_attrs[0], image_id: overlay_attrs[1]},
 				success: function(data){
-					big_thing._populateOverlay(data);
+					self._populateOverlay(data);
+					self._VideoJS();
 				}
 			});
 		});
@@ -607,12 +606,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			}
 		});
 		
-		var cHeight = $(window).height();
-		var cWidth = parseInt($(window).width());
-		var remainingWidth = cWidth - 1124;
-		var marginLeft = parseInt(remainingWidth / 2);
-		$('#slider-wrapper').css('margin-left', marginLeft + 'px');
-		
+		this._adjustOverlayPosition();
 		
 		$('#close-button').click( function() {
 			$( "#overlay" ).dialog('close');
@@ -675,6 +669,18 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			if($(this).parents('#other-print').length < 1)
 				$(this).parent().find('img').css('opacity', '0.5');
 		});
+	},
+	
+	_adjustOverlayPosition: function(){
+		var cHeight = $(window).height();
+		var cWidth = parseInt($(window).width());
+		var remainingWidth = cWidth - 1124;
+		var marginLeft = parseInt(remainingWidth / 2);
+		$('#slider-wrapper').css('margin-left', marginLeft + 'px');
+	},
+	
+	_VideoJS: function(){
+		$('#overlay video').VideoJS();
 	}
 	
 })
