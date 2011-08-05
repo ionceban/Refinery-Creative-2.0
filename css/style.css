@@ -835,7 +835,7 @@ strong {
     float: left;
 	padding-right:3px;
     margin: 0 0 3px 0;
-	width:40px;
+	max-width:200px;
 }
 .overlay-list a {
     display: block;
