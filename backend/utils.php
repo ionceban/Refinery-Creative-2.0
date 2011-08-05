@@ -239,7 +239,7 @@
 			
 			list($grid_width, $grid_height, $grid_src, $grid_attr) = getimagesize($src_attr);
 			
-			$height_constraint = 80;
+			$height_constraint = 70;
 			$width_constraint = intval(($height_constraint * $grid_width) / $grid_height);
 			
 			$response .= "<li>";
