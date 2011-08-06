@@ -231,7 +231,7 @@
 			$query = mysql_query($query_statement, $db_conn);
 			$row = mysql_fetch_row($query);
 			
-			$class_attr = $row[1] . "_" . $related_arr[$i];
+			$class_attr = $related_arr[$i];
 			$file_attrs = preg_split('/\./', $row[0]);
 			$thumber_ext = extension_checker($PROJS_PATH . $file_attrs[0] . "_t_thumber");
 			$list_body = $file_attrs[0] . "_t_grid";

@@ -511,19 +511,17 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	
 	openThumb: function(evt) {
 		evt.preventDefault();
-		var overlay_attrs = $(evt.target).attr('class').split('_');
-		this._getOverlayContent(overlay_attrs[0], overlay_attrs[1], overlay_attrs[2]);
+		var image_id = $(evt.target).attr('class');
+		this._getOverlayContent(image_id);
 	},
 	
-	_getOverlayContent: function(category, project_id, image_id) {
-		cl(category, image_id)
-		
+	_getOverlayContent: function(image_id) {
 		
 		var self = this;
 		$.ajax({
 			url:  'backend/get_overlay.php',
 			type: 'POST',
-			data: { category: category, image_id: image_id },
+			data: {image_id: image_id },
 			success: function(data) {
 				self._populateOverlay(data);
 				self._openOverlay();
@@ -537,11 +535,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		var self = this;
 		
 		$('#overlay').html(overlay_content);
-		
-		
-		//setTimeout("$('#overlay video').VideoJS()", 1000);
-		
-		//$('#overlay video').VideoJS();
 		
 		self._adjustOverlayPosition();
 		
@@ -567,12 +560,12 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		$('.overlay-block ul a img').click(function(evt){
 			evt.preventDefault();
-			var overlay_attrs = $(this).attr('class').split('_');
+			var image_id = $(this).attr('class');
 			$.ajax({
 				url: "backend/get_overlay.php",
 				cache: false,
 				type: "POST",
-				data: {category: overlay_attrs[0], image_id: overlay_attrs[1]},
+				data: {image_id: image_id},
 				success: function(data){
 					self._populateOverlay(data);
 					self._VideoJS();

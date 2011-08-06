@@ -3,7 +3,6 @@
 	require('db_connect.php');
 	require('utils.php');
 	
-	$category = $_POST['category'];
 	$image_id = $_POST['image_id'];
 	
 	$query_statement = "SELECT projects.id,projects.name FROM images,projects WHERE ";
@@ -33,21 +32,24 @@
 		return $response;
 	}
 	
-	$mediums = array();
 	$mediums[0] = 0;
-	$mediums['name'] = array();
-	$mediums['id'] = array();
 	
-	$query_statement = "SELECT id,name FROM mediums WHERE name='" . $category . "'";
-	$query = mysql_query($query_statement, $db_conn);
-	while($row = mysql_fetch_row($query)){
-		$mediums[0]++;
-		$mediums['name'][$mediums[0]] = $row[1];
-		$mediums['id'][$mediums[0]] = $row[0];
-	} 
+	$query_statement = "SELECT mediums.id, mediums.name FROM images, mediums, mediscs WHERE ";
+	$query_statement .= "images.id='" . $image_id . "' AND images.medisc_id=mediscs.id";
+	$query_statement .= " AND mediums.id=mediscs.medium_id";
 	
-	$query_statement = "SELECT id,name FROM mediums WHERE name!='" . $category . "'";
 	$query = mysql_query($query_statement, $db_conn);
+	$row = mysql_fetch_row($query);
+	
+	$mediums[0]++;
+	$mediums['name'][$mediums[0]] = $row[1];
+	$mediums['id'][$mediums[0]] = $row[0];
+	
+	$current_medium_id = $row[0];
+	
+	$query_statement = "SELECT id,name FROM mediums WHERE id!='" . $current_medium_id . "'";
+	$query = mysql_query($query_statement, $db_conn);
+	
 	while ($row = mysql_fetch_row($query)){
 		$mediums[0]++;
 		$mediums['name'][$mediums[0]] = $row[1];
@@ -80,7 +82,7 @@
 					$response .= "<a href='#'>";
 					$response .= "<div class='img-container'>";
 					
-					$class_attr = $mediums['name'][$j] . "_" . $image_array['id'][$i];
+					$class_attr = $image_array['id'][$i];
 					$file_attrs = preg_split('/\./', $image_array['name'][$i]);
 					$thumber_body = $PROJS_PATH . $file_attrs[0] . "_t_thumber";
 					$thumber_ext = extension_checker($thumber_body);
