@@ -927,14 +927,13 @@ strong {
 }
 #slider-wrapper ul li {
     float: left;
-    height: 500px;
     overflow: hidden;
     width: 600px;
 }
 #slider-wrapper ul li img {
     display: block;
     text-align: center;
-    width: 360px;
+    margin: auto;
 }
 .bx-next {
     background: url(../images/arrow-next.png) no-repeat;

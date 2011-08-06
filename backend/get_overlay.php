@@ -137,7 +137,24 @@
 	
 	$response .= "<li>";
 	if ($mediums['name'][1] == 'print' || $mediums['name'][1] == 'interactive'){
-		$response .= "<img src='" . $PROJS_PATH . $row[1] . "' />";
+		list($temp_width, $temp_height, $temp_src, $temp_attr) = getimagesize($PROJS_PATH . $row[1]);
+		
+		if ($temp_width > 600){
+			$old_width = $temp_width;
+			$old_height = $temp_height;
+			$temp_width = 600;
+			$temp_height = intval(($temp_width * $old_height) / $old_width);
+		}
+		
+		if ($temp_height > 550){
+			$old_width = $temp_width;
+			$old_height = $temp_height;
+			$temp_height = 550;
+			$temp_width = intval(($temp_height * $old_width) / $old_height);
+		}
+		
+		$response .= "<img src='" . $PROJS_PATH . $row[1] . "' style='width: " . $temp_width . "px; height: ";
+		$response .= $temp_height . "px' />";
 	} else {
 		$response .= "<div class='video-container' style='max-width: 598; max-height: 325'>";
 		$response .= "<div class='video-js-box'>";
