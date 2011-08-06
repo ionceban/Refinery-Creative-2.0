@@ -171,7 +171,24 @@
 		if ($image_array['id'][$i] != $image_id){
 			$response .= "<li>";
 			if ($mediums['name'][1] == 'print' || $mediums['name'][1] == 'interactive'){
-				$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' />";
+				list($temp_width, $temp_height, $temp_src, $temp_attr) = getimagesize($PROJS_PATH . $image_array['name'][$i]);
+		
+				if ($temp_width > 600){
+					$old_width = $temp_width;
+					$old_height = $temp_height;
+					$temp_width = 600;
+					$temp_height = intval(($temp_width * $old_height) / $old_width);
+				}
+				
+				if ($temp_height > 550){
+					$old_width = $temp_width;
+					$old_height = $temp_height;
+					$temp_height = 550;
+					$temp_width = intval(($temp_height * $old_width) / $old_height);
+				}
+				
+				$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' style='width: " . $temp_width . "px; height: ";
+				$response .= $temp_height . "px' />";
 			} else {
 				$response .= "<div class='video-container' style='width: 598px; height: 325px'>";
 				$response .= "<div class='video-js-box'>";
