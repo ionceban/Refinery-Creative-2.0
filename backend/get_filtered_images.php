@@ -214,19 +214,20 @@
 	$sizes_string = "";
 		
 	foreach ($image_map as $single_image){
-		if ($single_image['medium_name'] == 'print' || $single_image['medium_name'] == 'interactive'){
-			$types_string .= "0";
-		} else {
-			$types_string .= "1";
-		}
-		
-		if ($single_image['featured'] == '1'){
-			$sizes_string .= "1";
-		} else {
-			$sizes_string .= "0";
-		}
-		
 		if ($single_image['occ'] == 3){
+				
+			if ($single_image['medium_name'] == 'print' || $single_image['medium_name'] == 'interactive'){
+				$types_string .= "0";
+			} else {
+				$types_string .= "1";
+			}
+			
+			if ($single_image['featured'] == '1'){
+				$sizes_string .= "1";
+			} else {
+				$sizes_string .= "0";
+			}
+		
 			$results[0]++;
 			$results[$results[0]]['filename'] = $single_image['filename'];
 			$results[$results[0]]['featured'] = $single_image['featured'];
