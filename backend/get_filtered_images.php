@@ -236,7 +236,13 @@
 	
 	$command = "refinery_grid.exe " . $results[0] . " " . $types_string . " " . $sizes_string;
 	
-	$response = shell_exec($command);
+	exec($command, $response_array);
+	
+	$response = "";
+	
+	foreach ($response_array as $response_chunk){
+		$response .= $response_chunk;
+	}
 	
 	for ($i = $results[0]; $i >= 1; $i--){
 		$to_replace = "dummy_source" . $i . "'";
