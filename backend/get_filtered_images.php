@@ -70,7 +70,7 @@
 	
 	// build the medium+disciplines+years query
 	
-	$query_statement = "SELECT images.id, images.name, images.featured, mediums.name FROM images, years, disciplines";
+	$query_statement = "SELECT images.id, images.name, images.featured, mediums.name, images.thumb FROM images, years, disciplines";
 	$query_statement .= ", " . $table . ", " . $cross_table;
 	
 	if ($table != 'mediums'){
@@ -78,9 +78,16 @@
 	}
 	
 	$query_statement .= " WHERE ";
+
+	// not shadowbox-only
+	$query_statement .= "images.shadowbox=0";
+
+	// not in queue
+	$query_statement .= " AND images.queued=0";
+	
 	// category match
 	
-	$query_statement .= "images." . $cross_table_id . "=" . $cross_table . ".id";
+	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
 	$query_statement .= " AND " . $table . ".id=" . $category_id;
 	
@@ -142,6 +149,7 @@
 		$image_map[$row[0]]['filename'] = $row[1];
 		$image_map[$row[0]]['featured'] = $row[2];
 		$image_map[$row[0]]['medium_name'] = $row[3];
+		$image_map[$row[0]]['thumb'] = $row[4];
 		$image_map[$row[0]]['occ'] = 1;
 	}
 	
@@ -216,7 +224,7 @@
 	foreach ($image_map as $single_image){
 		if ($single_image['occ'] == 3){
 				
-			if ($single_image['medium_name'] == 'print' || $single_image['medium_name'] == 'interactive'){
+			if ($single_image['thumb'] == '1'){
 				$types_string .= "0";
 			} else {
 				$types_string .= "1";
@@ -235,7 +243,7 @@
 		}
 	}
 	
-	$command = "refinery_grid.exe " . $results[0] . " " . $types_string . " " . $sizes_string;
+	$command = "./refinery_grid " . $results[0] . " " . $types_string . " " . $sizes_string;
 	
 	exec($command, $response_array);
 	

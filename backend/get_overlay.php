@@ -156,10 +156,12 @@
 		$response .= "<img src='" . $PROJS_PATH . $row[1] . "' style='width: " . $temp_width . "px; height: ";
 		$response .= $temp_height . "px' />";
 	} else {
-		$response .= "<div class='video-container' style='max-width: 598; max-height: 325'>";
+		$video_attrs = preg_split('/\./', $row[1]);
+		$response .= "<div class='video-container'>";
 		$response .= "<div class='video-js-box'>";
 		$response .= "<video class='video-js' height='470' width=600' controls preload>";
-		$response .= "<source src='" . $PROJS_PATH . $row[1] . "' type='video/ogg' />";
+		//$response .= "<source src='" . $PROJS_PATH . $row[1] . "' type='video/ogg' />";
+		$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".mp4' type='video/mp4' />";
 		$response .= "</video>";
 		$response .= "</div>";
 		$response .= "</div>";
@@ -190,11 +192,13 @@
 				$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' style='width: " . $temp_width . "px; height: ";
 				$response .= $temp_height . "px' />";
 			} else {
-				$response .= "<div class='video-container' style='width: 598px; height: 325px'>";
+				$video_attrs = preg_split('/\./', $image_array['name'][$i]);
+				$response .= "<div class='video-container'>";
 				$response .= "<div class='video-js-box'>";
 				$response .= "<video  height='470' width='600' class='video-js' controls preload>";
-				$response .= "<source src='" . $PROJS_PATH  . $image_array['name'][$i] . "' ";
-				$response .= "type='video/ogg' />";
+				//$response .= "<source src='" . $PROJS_PATH . $image_array['name'][$i] . "' ";
+				//$response .= "type='video/ogg' />";
+				$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".mp4' type='video/mp4' />"; 
 				$response .= "</video>";
 				$response .= "</div>";
 				$response .= "</div>";
