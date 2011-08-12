@@ -157,9 +157,9 @@
 		$response .= $temp_height . "px' />";
 	} else {
 		$video_attrs = preg_split('/\./', $row[1]);
-		$response .= "<div class='video-container'>";
+		$response .= "<div class='video-container' >";
 		$response .= "<div class='video-js-box'>";
-		$response .= "<video class='video-js' height='470' width=600' controls preload>";
+		$response .= "<video class='video-js' height='470' width='600' controls preload>";
 		//$response .= "<source src='" . $PROJS_PATH . $row[1] . "' type='video/ogg' />";
 		$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".mp4' type='video/mp4' />";
 		$response .= "</video>";
