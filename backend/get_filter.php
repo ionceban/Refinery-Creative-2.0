@@ -114,7 +114,7 @@
 	
 	$query_statement = "SELECT keywords.name, COUNT(*) FROM images, keywords, imgkeyws";
 	$query_statement .= ", " . $table . ", " . $cross_table . " ";
-	$query_statement .= "WHERE (images.id=imgkeyws.image_id AND keywords.id=imgkeyws.keyword_id";
+	$query_statement .= "WHERE (images.id=imgkeyws.image_id AND keywords.id=imgkeyws.keyword_id AND keywords.hidden=0";
 	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
 	$query_statement .= " AND " . $table . ".name='" . $category . "')";
