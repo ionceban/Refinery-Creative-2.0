@@ -75,7 +75,7 @@
 	
 	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . " (" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	
@@ -99,7 +99,7 @@
 	
 	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . " (" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	
@@ -123,7 +123,7 @@
 	
 	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . " (" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	
@@ -147,7 +147,7 @@
 	
 	while ($row = mysql_fetch_row($query)){
 		$response .= "<dd>";
-		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . "(" . $row[1] . ")</a>";
+		$response .= "<a href='#' rel='" . $row[0] . "'>" . $row[0] . " (" . $row[1] . ")</a>";
 		$response .= "</dd>";
 	}
 	$response .= "</dl>";
