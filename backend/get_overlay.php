@@ -160,8 +160,8 @@
 		$response .= "<div class='video-container' >";
 		$response .= "<div class='video-js-box'>";
 		$response .= "<video class='video-js' height='470' width='600' controls preload>";
-		//$response .= "<source src='" . $PROJS_PATH . $row[1] . "' type='video/ogg' />";
 		$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".mp4' type='video/mp4' />";
+		$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".ogg' type='video/ogg' />";
 		$response .= "</video>";
 		$response .= "</div>";
 		$response .= "</div>";
@@ -196,9 +196,8 @@
 				$response .= "<div class='video-container'>";
 				$response .= "<div class='video-js-box'>";
 				$response .= "<video  height='470' width='600' class='video-js' controls preload>";
-				//$response .= "<source src='" . $PROJS_PATH . $image_array['name'][$i] . "' ";
-				//$response .= "type='video/ogg' />";
-				$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".mp4' type='video/mp4' />"; 
+				$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".mp4' type='video/mp4' />";
+			   	$response .= "<source src='" . $PROJS_PATH . $video_attrs[0] . ".ogg' type='video/ogg' />";	
 				$response .= "</video>";
 				$response .= "</div>";
 				$response .= "</div>";
