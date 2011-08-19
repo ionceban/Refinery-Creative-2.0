@@ -592,12 +592,12 @@ strong {
 }
 .subcontent, .subcontent-active {
     display: none;
-    padding: 27px 0 0 0;
+    padding: 0 0 0 0;
 }
 .subcontent-active {
     display: block;
     opacity: 0;
-    padding: 27px 0 0 0;
+    padding: 0 0 0 0;
 }
 #av-list {
     overflow: hidden;
