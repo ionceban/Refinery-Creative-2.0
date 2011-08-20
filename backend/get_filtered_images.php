@@ -122,7 +122,7 @@
 	$query_statement .= " AND images.year_id=years.id";
 	$query_statement .= " AND (1=";
 	
-	if (!$_POST['years']){
+	if (!$_POST['year']){
 		$query_statement .= "1";
 	} else {
 		$query_statement .= "0";
