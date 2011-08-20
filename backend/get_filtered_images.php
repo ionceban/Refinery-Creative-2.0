@@ -136,7 +136,7 @@
 		}
 	}
 	
-	$query_statement .= ")";
+	$query_statement .= ") ORDER BY images.date DESC, images.id DESC";
 	
 	// trigger it
 
