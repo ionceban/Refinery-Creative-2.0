@@ -1265,6 +1265,23 @@
 					
 					
 				});
+
+				$(document).ready(function(){
+					$('.bx-next').click(function(){
+						$('#overlay video').each(function(){
+							$(this).player.pause();
+						});
+						alert('clicked');
+						return false;
+					});
+
+					$('.bx-prev').click(function(){
+						$('#overlay video').each(function(){
+							$(this).player.pause();
+						});
+						return false;
+					});
+				});
 				
 
 			</script>

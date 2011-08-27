@@ -557,7 +557,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			hideControlOnEnd: true
 		});
 		
-		
 		$('.overlay-block ul a img').click(function(evt){
 			evt.preventDefault();
 			var image_id = $(this).attr('class');
@@ -587,6 +586,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			buttons: {
 				Ok: function() {
 					$( this ).dialog( "close" );
+					$('#overlay').html('');
 				}
 			},
 			open: function() {
@@ -674,6 +674,20 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	
 	_VideoJS: function(){
 		$('#overlay video').VideoJS();
+		$('.bx-next').click(function(){
+			$('#overlay video').each(function(){
+				$(this)[0].player.pause();
+			});
+			return false;
+		});
+
+		$('.bx-prev').click(function(){
+			$('#overlay video').each(function(){
+				$(this)[0].player.pause();
+			});
+			return false;
+		});
+
 	}
 	
 })
