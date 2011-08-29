@@ -108,17 +108,23 @@
 	$response .= '<div class="overlay-block">';
 	$response .= '<h1>related work</h1>';
 	$response .= '<ul class="overlay-list clearfix">';
+
+	// Limit the number of results
+	$related_limit = 20;
+	$related_counter = 0;
 	
 	// 3 or more keywords
-	$related_arr = get_number_keywords($image_id, $db_conn, 3, 300);
+	$related_arr = get_number_keywords($image_id, $db_conn, 3, 300, $related_limit - $related_counter);
+	$related_counter += intval($related_arr[0]); 
 	$response .= process_related_array($related_arr, $db_conn, $PROJS_PATH);
 
 	// 2 keywords
-	$related_arr = get_number_keywords($image_id, $db_conn, 2, 2);
+	$related_arr = get_number_keywords($image_id, $db_conn, 2, 2, $related_limit - $related_counter);
+	$related_counter += intval($related_arr[0]);
 	$response .= process_related_array($related_arr, $db_conn, $PROJS_PATH);
 	
 	// medium and 1 keyword
-	$related_arr = get_one_keyword_medium($image_id, $db_conn);
+	$related_arr = get_one_keyword_medium($image_id, $db_conn, $related_limit - $related_counter);
 	$response .= process_related_array($related_arr, $db_conn, $PROJS_PATH);
 	
 	

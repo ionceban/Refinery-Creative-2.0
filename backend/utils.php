@@ -126,7 +126,7 @@
 		return $query_statement;
 	}
 
-	function get_number_keywords($image_id, $db_conn, $low_limit, $up_limit){
+	function get_number_keywords($image_id, $db_conn, $low_limit, $up_limit, $results_limit){
 		$query_statement = "SELECT projects.id FROM images, projects WHERE images.id='" . $image_id . "' AND images.project_id=projects.id";
 		$query = mysql_query($query_statement, $db_conn);
 		$row = mysql_fetch_row($query);
@@ -170,7 +170,7 @@
 		}
 		
 		foreach ($partial as $elem){
-			if (intval($elem['occ']) >= $low_limit && intval($elem['occ']) <= $up_limit){
+			if (intval($elem['occ']) >= $low_limit && intval($elem['occ']) <= $up_limit && $response[0] < $results_limit){
 				$response[0]++;
 				$response['image_id'][$response[0]] = $elem['image_id'];
 				$response['filename'][$response[0]] = $elem['filename'];
@@ -181,7 +181,7 @@
 		return $response;
 	}
 
-	function get_one_keyword_medium($image_id, $db_conn){
+	function get_one_keyword_medium($image_id, $db_conn, $results_limit){
 		$query_statement = "SELECT mediscs.medium_id FROM images, mediscs WHERE (images.medisc_id=mediscs.id";
 		$query_statement .= " AND images.id='" . $image_id . "')";
 		$query = mysql_query($query_statement, $db_conn);
@@ -224,7 +224,7 @@
 		$response[0] = 0;
 		
 		foreach ($partial as $elem){
-			if ($elem['occ'] == 2){
+			if ($elem['occ'] == 2 && $response[0] < $results_limit){
 				$response[0]++;
 				$response['image_id'][$response[0]] = $elem['image_id'];
 				$response['filename'][$response[0]] = $elem['filename'];
