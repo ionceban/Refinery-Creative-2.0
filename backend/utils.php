@@ -127,6 +127,11 @@
 	}
 
 	function get_number_keywords($image_id, $db_conn, $low_limit, $up_limit){
+		$query_statement = "SELECT projects.id FROM images, projects WHERE images.id='" . $image_id . "' AND images.project_id=projects.id";
+		$query = mysql_query($query_statement, $db_conn);
+		$row = mysql_fetch_row($query);
+		$current_project = $row[0];
+
 		$query_statement = "SELECT keyword_id FROM imgkeyws WHERE image_id='" . $image_id . "'";
 		$query = mysql_query($query_statement, $db_conn);
 		
@@ -149,6 +154,7 @@
 			$query_statement = "SELECT images.id, images.name, projects.name FROM images, projects, imgkeyws WHERE ";
 			$query_statement .= "images.project_id=projects.id AND images.id=imgkeyws.image_id";
 			$query_statement .= " AND images.id!='" . $image_id . "' AND imgkeyws.keyword_id='" . $keyw_arr[$i] . "'";
+			$query_statement .= " AND projects.id!='" . $current_project . "'";
 			$query = mysql_query($query_statement, $db_conn);
 			
 			while ($row = mysql_fetch_row($query)){
@@ -238,18 +244,18 @@
 			$class_attr = $related_arr['image_id'][$i];
 			$file_attrs = preg_split('/\./', $related_arr['filename'][$i]);
 			$thumber_ext = extension_checker($PROJS_PATH . $file_attrs[0] . "_t_thumber");
-			$list_body = $file_attrs[0] . "_t_list";
+			$list_body = $file_attrs[0] . "_t_normal";
 			$src_attr = $PROJS_PATH . $list_body . "." . $thumber_ext;
 			
 			list($grid_width, $grid_height, $grid_src, $grid_attr) = getimagesize($src_attr);
 			
-			$height_constraint = 70;
+			$height_constraint = 50;
 			$width_constraint = intval(($height_constraint * $grid_width) / $grid_height);
 			
 			$response .= "<li>";
 			$response .= "<a href='#'>";
 			$response .= "<div class='img-container'>";
-			$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' style='width:" . $grid_width . "px; height:" . $grid_height . "px' />"; 
+			$response .= "<img class='" . $class_attr . "' src='" . $src_attr . "' style='width:" . $width_constraint . "px; height:" . $height_constraint . "px' />"; 
 			$response .= "<span class='tooltip'><h5>" . $related_arr['project_name'][$i] . "</h5></span>";
 			$response .= "</div>";
 			$response .= "</a>";

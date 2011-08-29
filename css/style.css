@@ -726,7 +726,7 @@ strong {
 #filter-content dl {
     border-right: 1px solid #4e4e4e;
     float: left;
-    height: 230px;
+    /*height: 230px;*/
     padding: 0 40px;
 }
 #filter-content dl.first-col {
