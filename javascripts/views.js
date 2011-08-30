@@ -556,6 +556,8 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			speed: 300,
 			hideControlOnEnd: true
 		});
+
+		$('#main-slider li').filter(':first').css('visibility', 'hidden');
 		
 		$('.overlay-block ul a img').click(function(evt){
 			evt.preventDefault();
