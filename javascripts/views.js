@@ -674,6 +674,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	
 	_VideoJS: function(){
 		$('#overlay video').VideoJS();
+		$('#overlay video')[1].player.play();
 		$('.bx-next').click(function(){
 			$('#overlay video').each(function(){
 				$(this)[0].player.pause();
