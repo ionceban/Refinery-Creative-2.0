@@ -523,9 +523,11 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			type: 'POST',
 			data: {image_id: image_id },
 			success: function(data) {
+				//self._openOverlay();
 				self._populateOverlay(data);
 				self._openOverlay();
 				self._VideoJS();
+				self._overlayInitSlider();
 			}
 		});
 	},
@@ -542,7 +544,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		
 		self._handleOverlayScrollbar();
 		
-		// overlay other slider
+		/*// overlay other slider
 		var other_slider = $('#other-slider').bxSlider({
 			infiniteLoop: false,
 			displaySlideQty: 6,
@@ -554,10 +556,16 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		var overlay_slider = $('#main-slider').bxSlider({
 			infiniteLoop: false,
 			speed: 300,
-			hideControlOnEnd: true
-		});
+			hideControlOnEnd: true,
+			onAfterSlide: function(a,b,c){
+				//console.log(c.find('video'));
+				//c.find('video').filter(':first')[0].player.play();
+			}
+		});*/
 
-		$('#main-slider li').filter(':first').css('visibility', 'hidden');
+		//self._overlayInitSlider();
+
+		//$('#main-slider li').filter(':first').css('visibility', 'hidden');
 		
 		$('.overlay-block ul a img').click(function(evt){
 			evt.preventDefault();
@@ -675,22 +683,51 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	},
 	
 	_VideoJS: function(){
-		$('#overlay video').not(':first').VideoJS();
-		$('#overlay video')[1].player.play();
-		$('.bx-next').click(function(){
-			$('#overlay video').each(function(){
+		$('#overlay video').VideoJS();
+		//$('#overlay video')[0].player.play();
+		/*$('.bx-next').click(function(){
+			$('#overlay video').not(':first').each(function(){
 				$(this)[0].player.pause();
 			});
 			return false;
 		});
 
 		$('.bx-prev').click(function(){
-			$('#overlay video').each(function(){
+			$('#overlay video').not(':first').each(function(){
+				$(this)[0].player.pause();
+			});
+			return false;
+		});*/
+
+	},
+
+	_overlayInitSlider: function(){
+		$('#main-slider').bxSlider({
+			infiniteLoop: false,
+			speed: 300,
+			hideControlOnEnd: true,
+			onAfterSlide: function(a,b,c){
+				c.find('video').filter(':first')[0].player.play();
+			}
+
+		});
+		$('.bx-next').click(function(){
+			$('#overlay video').not(':first').each(function(){
 				$(this)[0].player.pause();
 			});
 			return false;
 		});
 
+		$('.bx-prev').click(function(){
+			$('#overlay video').not(':first').each(function(){
+				$(this)[0].player.pause();
+			});
+			return false;
+		});
+
+
+		$('#main-slider li').filter(':first').css('visibility', 'hidden');
+		//$('#overlay video')[1].player.play();
 	}
 	
 })
