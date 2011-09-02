@@ -187,6 +187,7 @@ strong {
 .section-dynamic-content a {
     background-color: #e5e5e5;
     display: block;
+	cursor: pointer;
 }
 .section-dynamic-content img {
     display: block;
