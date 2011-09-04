@@ -600,12 +600,8 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				}
 			},
 			open: function() {
-				$(window).bind("mousewheel", function() {
-					return false;
-				});
-			},
-			close: function() {
-				$(window).unbind("mousewheel");
+				// jquery ui dialog fix
+				$('.ui-dialog').css({ 'top': 0 });
 			}
 		});
 		
