@@ -114,6 +114,9 @@ var webSections = (function() {
  * - splash page toggle
  */
 var startApplication = function() {
+	// Search initialize
+	LiveSeek.init();
+	
 	var application_urls = new Refinery.Router.DefaultUrls({ routes: Refinery.Config.routes });
 	$('#dummy-stack').show();
 	$('#content-wrapper').show();
