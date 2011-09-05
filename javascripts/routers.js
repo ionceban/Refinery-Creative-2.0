@@ -35,6 +35,9 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * index action
 	 */
 	index: function() {
+		// close and reset the search wrap
+		LiveSeek.destruct();
+		
 		$('body, html').animate({scrollTop: 0});
 		
 		// clears the "web" sections
@@ -63,6 +66,9 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * MAJOR PROBLEMS HERE
 	 */
 	viewWebsiteMains: function(subsection) {
+		// close and reset the search wrap
+		LiveSeek.destruct();
+		
 		// Goes to the specific websection
 		Sectionize.reset(function() {
 			webSections.reactTo(subsection);
@@ -91,6 +97,10 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * Shows only the section without the filters
 	 */
 	showSection: function(section) {
+		// close and reset the search wrap
+		LiveSeek.destruct();
+	
+	
 		// clears the "web" sections
 		this._clearWebSections();
 		
