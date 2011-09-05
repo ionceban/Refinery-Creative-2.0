@@ -1087,3 +1087,39 @@ strong {
 #no-video{
 	display: none;
 }
+
+
+
+/*
+	Search overlay
+*/
+#search-wrap {
+	display:none;
+	
+	margin:63px auto 0 auto;
+	width:970px;
+	height:400px;
+	
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	z-index:99999;
+	
+	background-color:#fff;
+	border-bottom:1px solid red;
+}
+	#search-wrap h2 {
+		color: #1A1E1F;
+		font-family: 'HelveticaNeueBold';
+		font-size: 20px;
+		line-height: 30px;
+		text-align: right;
+		border-bottom: 1px solid #a8a8a8;
+	}
+		#search-wrap h2 span {
+			cursor:pointer;
+			float:left;
+			font-size:12px;
+			text-align:left;
+		}
