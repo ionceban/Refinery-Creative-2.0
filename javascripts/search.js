@@ -2,7 +2,7 @@ var LiveSeek = (function() {
 	var dummy_val = 		'Search...';
 	var field_modified = 	false;
 	var current_ajax =		false;
-	var ajax_url = 			'backend/get_filtered_images.php';
+	var ajax_url = 			'backend/get_search_images.php';
 	var input_field = 		$('#search-input');
 	var search_wrap = 		$('#search-wrap');
 	var overlay_state = 	0;
@@ -105,7 +105,7 @@ var LiveSeek = (function() {
 		current_ajax = $.ajax({
 			url:  ajax_url,
 			type: 'POST',
-			data: { image_id: 's' },
+			data: { query_string: $('#search-input').val() },
 			success: function(data) {
 				if(cb && typeof(cb) === 'function') {
 					cb.call(this, data);
