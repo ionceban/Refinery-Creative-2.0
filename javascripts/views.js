@@ -53,6 +53,16 @@ Refinery.View.Sections = Backbone.View.extend({
 		if(this.current_section == el_section) {
 			this.current_section = null;
 			return false;
+		} else {
+			console.log('should load bar for section ' + el_section);
+			$.ajax({
+				url: "backend/get_disciplines_bar.php",
+				type: "POST",
+				data: {category: el_section},
+				success: function(data){
+					$('#' + el_section + '-discbar').html(data);
+				}
+			});
 		}
 		
 		this.current_section = el_section;
