@@ -704,7 +704,9 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			speed: 300,
 			hideControlOnEnd: true,
 			onAfterSlide: function(a,b,c){
-				c.find('video').filter(':first')[0].player.play();
+				c.find('video').filter(':first').each(function(){
+					$(this)[0].player.play();
+				});
 			}
 
 		});
