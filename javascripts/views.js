@@ -578,6 +578,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				success: function(data){
 					self._populateOverlay(data);
 					self._VideoJS();
+					self._overlayInitSlider();
 				}
 			});
 		});
