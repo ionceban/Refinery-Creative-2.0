@@ -404,6 +404,18 @@ strong {
 #contact {
     padding: 0 0 550px 0;
 }
+
+#contact h5 {
+	color: #d30508;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#contact h5.last {
+	margin-top: 10px;
+}
+
+
 #contact-content {
     background: #dcdcdc;
     overflow: hidden;
