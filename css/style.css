@@ -242,7 +242,7 @@ strong {
     display: block;
     float: left;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 42px;
     margin: 0 12px;
 }
