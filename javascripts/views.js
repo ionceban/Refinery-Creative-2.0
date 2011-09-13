@@ -313,12 +313,6 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 				self.animateContent($section)
 			});
 		});
-		
-		//cl('fetchin for section:: ', this.current_section);
-		//cl('filter discipline:: ', this.filters['discipline']);
-		//cl('filter deliverable:: ', this.filters['deliverable']);
-		//cl('filter keywords:: ', this.filters['keywords']);
-		//cl('filter year:: ', this.filters['year']);
 	},
 	
 	/**
@@ -509,7 +503,7 @@ Refinery.View.FilterMenu = Backbone.View.extend({
  */
 Refinery.View.ThumbView = Backbone.View.extend({
 	
-	el: $('#dummy-work-inner .section-dynamic-content'),
+	el: $('#dummy-work-inner .section-dynamic-content, #search-wrap'),
 	
 	initialize: function() {
 		_.extend(this, Backbone.Events);
@@ -526,7 +520,6 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	},
 	
 	_getOverlayContent: function(image_id) {
-		
 		var self = this;
 		$.ajax({
 			url:  'backend/get_overlay.php',
@@ -543,39 +536,12 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	},
 	
 	_populateOverlay: function(overlay_content){
-		
 		var self = this;
 		
 		$('#overlay').html(overlay_content);
-		
 		self._adjustOverlayPosition();
-		
 		self._handleOverlayHovers();
-		
 		self._handleOverlayScrollbar();
-		
-		/*// overlay other slider
-		var other_slider = $('#other-slider').bxSlider({
-			infiniteLoop: false,
-			displaySlideQty: 6,
-			hideControlOnEnd: true
-		});
-		
-		
-		// overlay slide initializer
-		var overlay_slider = $('#main-slider').bxSlider({
-			infiniteLoop: false,
-			speed: 300,
-			hideControlOnEnd: true,
-			onAfterSlide: function(a,b,c){
-				//console.log(c.find('video'));
-				//c.find('video').filter(':first')[0].player.play();
-			}
-		});*/
-
-		//self._overlayInitSlider();
-
-		//$('#main-slider li').filter(':first').css('visibility', 'hidden');
 		
 		$('.overlay-block ul a img').click(function(evt){
 			evt.preventDefault();
