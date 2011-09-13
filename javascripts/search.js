@@ -42,9 +42,9 @@ var LiveSeek = (function() {
 		var $filterTab = $('#filter-panel');
 		var width = $filterTab.width();
 		if(state == 'hide') {
-			$filterTab.animate({ '-' + width + 'px' }, 200, 'linear')
+			$filterTab.animate({ 'margin-left': '-' + width + 'px' }, 200, 'linear');
 		} else {
-			$filterTab.animate({ 'margin-left': '-' + width - 30 + 'px' }, 200, 'linear')
+			$filterTab.animate({ 'margin-left': '-' + (width - 30) + 'px' }, 200, 'linear');
 		}
 	}
 	
