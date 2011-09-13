@@ -169,7 +169,7 @@ strong {
 #btn-showsite {
     display: block;
     height: 57px;
-    margin: 10% auto 0 auto;
+    margin: 7% auto 0 auto;
     width: 197px;
 }
 #dummy-stack {
@@ -266,7 +266,7 @@ strong {
     position: absolute;
     top: 42px;
     width: 224px;
-    z-index: 1000;
+    z-index: 999999;
 }
 .login-dropdown-wrapper {
     border-bottom: 1px solid #e20b3a;
@@ -1107,31 +1107,46 @@ strong {
 */
 #search-wrap {
 	display:none;
-	
 	margin:63px auto 0 auto;
 	width:970px;
 	height:400px;
-	
 	position:absolute;
 	top:0;
 	left:0;
 	right:0;
-	z-index:99999;
-	
+	z-index:999;
 	background-color:#fff;
 	border-bottom:1px solid red;
 }
 	#search-wrap h2 {
-		color: #1A1E1F;
-		font-family: 'HelveticaNeueBold';
-		font-size: 20px;
-		line-height: 30px;
-		text-align: right;
+		color: #4849b5;
+		display: block;
+		font-family: 'HelveticaRoman',Arial,sans-serif;
+		font-size: 105px;
+		height: 105px;
+		letter-spacing: -4px;
+		line-height: 105px;
 		border-bottom: 1px solid #a8a8a8;
+		font-weight:normal;
 	}
 		#search-wrap h2 span {
+			color:#1A1E1F;
 			cursor:pointer;
-			float:left;
+			float:right;
 			font-size:12px;
 			text-align:left;
+			letter-spacing:0;
 		}
+
+#search-results {
+	padding-top:14px;
+}
+	#search-results a {
+		display:block;
+		cursor:pointer;
+		background-color:#E5E5E5;
+	}
+	#search-results img {
+		display:block;
+		opacity:0;
+	}
