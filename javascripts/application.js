@@ -70,6 +70,9 @@ var Scrollize = (function() {
 })();
 
 
+/**
+ * webSections module
+ */
 var webSections = (function() {
 	var current_section = null;
 	
@@ -116,8 +119,9 @@ var webSections = (function() {
 var startApplication = function() {
 	// Search initialize
 	LiveSeek.init();
-	
+	// app urls and router
 	var application_urls = new Refinery.Router.DefaultUrls({ routes: Refinery.Config.routes });
+	// ...and co
 	$('#dummy-stack').show();
 	$('#content-wrapper').show();
 	$('#header-inner').addClass('active');
