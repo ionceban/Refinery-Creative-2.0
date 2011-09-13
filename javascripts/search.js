@@ -19,8 +19,8 @@ var LiveSeek = (function() {
 		$('#search-wrap').css({
 			'height': $('#container').height()
 		});
-		// close the filtertab
-		$('#filter-panel').animate({ 'margin-left': '-' + ($(this).width() - 30) + 'px' }, 200, 'linear').addClass('hidden');
+		// toggles the filter tab's visibility
+		toggleFiltertab('hide');
 	}
 	
 	/**
@@ -33,6 +33,19 @@ var LiveSeek = (function() {
 		resetInput();
 		overlay_state = 0;
 		$(input_field).blur();
+		
+		// toggles the filter tab's visibility
+		toggleFiltertab('show');
+	}
+	
+	var toggleFiltertab = function(state) {
+		var $filterTab = $('#filter-panel');
+		var width = $filterTab.width();
+		if(state == 'hide') {
+			$filterTab.animate({ '-' + width + 'px' }, 200, 'linear')
+		} else {
+			$filterTab.animate({ 'margin-left': '-' + width - 30 + 'px' }, 200, 'linear')
+		}
 	}
 	
 	/**
