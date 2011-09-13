@@ -18,7 +18,9 @@ var LiveSeek = (function() {
 		}
 		$('#search-wrap').css({
 			'height': $('#container').height()
-		})
+		});
+		// close the filtertab
+		$('#filter-panel').animate({ 'margin-left': '-' + ($(this).width() - 30) + 'px' }, 200, 'linear').addClass('hidden');
 	}
 	
 	/**
@@ -26,6 +28,7 @@ var LiveSeek = (function() {
 	 * @description closes the overlay
 	 */
 	var closeOverlay = function() {
+		$('#search-results').empty();
 		$(search_wrap).hide();
 		resetInput();
 		overlay_state = 0;
@@ -119,11 +122,17 @@ var LiveSeek = (function() {
 	 * @description receives a query and initiates the ajax search
 	 */
 	var performSearch = function(query) {
-		cl(query)
-		
 		doAjax(function(data) {
-			$('#search-results').html(data)
+			$('#search-results').html(data);
+			animateContent();
 		});
+	}
+	
+	/**
+	 * Animates the thumbnails
+	 */
+	var animateContent = function() {
+		RandomLoader.load($('#search-results').find('img'));
 	}
 	
 	
