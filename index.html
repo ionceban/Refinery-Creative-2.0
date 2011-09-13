@@ -1,0 +1,1313 @@
+<!DOCTYPE HTML>
+<html lang="en" class="no-js">
+  <head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="stylesheet" href="css/frontend.css"/>
+		<script type="text/javascript" src="javascripts/modernizr.js"></script>
+		<title>Refinery</title>
+		<!--[if IE 8]>
+		<link type="text/css" rel="stylesheet" href="css/ie8.css"/>
+		<![endif]-->
+		<!--[if IE 7]>
+		<link type="text/css" rel="stylesheet" href="css/ie7.css"/>
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.14.custom.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+		<!-- styles needed by jScrollPane -->
+		<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+		<link type="text/css" href="video-js.css" rel="stylesheet" media="screen" title="Video JS" charset="utf-8" />
+	</head>
+	<body>
+		<!--<div id="container" class="intro">-->
+		<div id="container" class="site">
+			<section id="main-logo" style="">
+				<div id="video-wrapper">
+					<video  id="video" width="598" height="325" autoplay="true">
+						<source src="video/refinery.mp4" type="video/mp4" />
+						<source src="video/refinery.ogg" type="video/ogg" />
+					</video>
+				</div><!-- end video-wrapper -->
+				<div id="no-video">
+					<img src="images/big-logo.jpg" alt="Refinery" />
+				</div><!-- no-video -->
+				<a href="#" id="btn-showsite"><img style="display:block;" src="images/btn_goToSite.jpg" /></a>
+			</section>
+			<div id="push-content"></div>
+			<!-- Header -->
+			<header id="header">
+				<div id="header-inner" class="clearfix">
+					<h1 id="logo"><a href="./">the refinery</a></h1>
+					<section id="top-bar">
+						<!-- main-navigation -->
+						<nav>
+							<ul>
+								<li>
+									<a href="#!/website/work" rel="work">work</a>
+								</li>
+								<li>
+									<a href="#!/website/about" rel="about">about</a>
+								</li>
+								<li>
+									<a href="#!/website/careers" rel="careers">careers</a>
+								</li>
+								<li>
+									<a href="#!/website/contact" rel="contact">contact</a>
+								</li>
+								<li id="login">
+									<a id="login-dropdown" href="#">client login</a>
+									<div class="login-dropdown-wrapper">
+										<div class="dropdown-inner">
+											<form>
+												<fieldset>
+													<input name="username" type="text" value="username" />
+													<input name="pass" type="password" value="password" />
+												</fieldset>
+												<fieldset>
+													<input type="submit" value="Login" />
+												</fieldset>
+											</form>
+										</div>
+									</div>
+								</li>
+								<li id="employee">
+									<a href="#" id="employee-login" rel="employee">employee login</a>
+									<div class="login-dropdown-wrapper">
+										<div class="dropdown-inner">
+											<form>
+												<fieldset>
+													<input name="username" type="text" value="username" />
+													<input name="pass" type="password" value="password" />
+												</fieldset>
+												<fieldset>
+													<input type="submit" value="Login" />
+												</fieldset>
+											</form>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</nav>
+						<!-- /main-navigation -->
+						<div id="search">
+							<div id="inner-search">
+								<input type="submit" id="search-button" />
+								<input type="text" value="Search..." name="search" id="search-input" />
+								<input type="button" id="close-button" value="close" />
+							</div>
+						</div>
+					</section>
+				</div>
+			</header>
+			<!-- /Header -->
+			<div id="loader-bar" style="position:fixed; top:62px; z-index:999; display:none; color:#539297">
+				<b>loading...</b>
+			</div>
+			<!-- Dummy sections stack -->
+			<div id="dummy-stack" style="display:none;">
+				<h1 class="title h_f_work" style="display:none"><a href="#!/website/work">work</a></h1>
+				<h1 class="title h_f_about" style="display:none"><a href="#!/website/about">about</a></h1>
+				<h1 class="title h_f_careers" style="display:none"><a href="#!/website/careers">careers</a></h1>
+				<h1 class="title h_f_contact" style="display:none"><a href="#!/website/contact">contact</a></h1>
+			</div>
+			<!-- /Dummy sections stack -->
+			<section id="content-wrapper" style="display:none;">
+				<!-- Section Work -->
+				<section id="work">
+					<h1 class="title"><a href="#!/website/work">work</a></h1>
+					<section id="work-inner">
+						<div id="dummy-work-inner">
+							<!-- av-block -->
+							<section id="av-block" class="work-section">
+								<a id="av-nav" class="work-menu" href="#!/av">a/v</a>
+								<article id="av-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="av-discbar">
+											<li>
+												<a href="#!/av" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/av" rel="trailers">trailers</a>
+											</li>
+											<li>
+												<a href="#!/av" rel="tv spots">tv spots</a>
+											</li>
+											<li>
+												<a href="#!/av" rel="promos">promos</a>
+											</li>
+											<li>
+												<a href="#!/av" rel="commercials">commercials</a>
+											</li>
+											<li>
+												<a href="#!/av" rel="epk">epk</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="av-list" class="section-dynamic-content"></section><!-- end av-list -->
+								</article><!-- end av-inner-content-->
+							</section>
+							<!-- /av-block -->
+							<!-- print-block -->
+							<section id="print-block" class="work-section">
+								<a id="print-nav" class="work-menu" href="#!/print">print</a>
+								<article id="print-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="print-discbar">
+											<li>
+												<a href="#!/print" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/print" rel="theatrical">theatrical</a>
+											</li>
+											<li>
+												<a href="#!/print" rel="home entertainment">home entertainment</a>
+											</li>
+											<li>
+												<a href="#!/print" rel="broadcast">broadcast</a>
+											</li>
+											<li>
+												<a href="#!/print" rel="gaming">gaming</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="print-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- /print-block -->
+							<!-- interactiv-block -->
+							<section id="interactive-block" class="work-section">
+								<a id="interactive-nav" class="work-menu" href="#!/interactive">interactive</a>
+								<article id="interactive-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="interactive-discbar">
+											<li>
+												<a href="#!/interactive" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/interactive" rel="theatrical">theatrical</a>
+											</li>
+											<li>
+												<a href="#!/interactive" rel="home entertainment">home entertainment</a>
+											</li>
+											<li>
+												<a href="#!/interactive" rel="broadcast">broadcast</a>
+											</li>
+											<li>
+												<a href="#!/interactive" rel="gaming">gaming</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="interactive-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- /interactiv-block -->
+							<!-- dmotion-block -->
+							<section id="digital-motion-block" class="work-section">
+								<a id="motion-nav" class="work-menu" href="#!/digital-motion">digital motion</a>
+								<article id="dmotion-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="digital-motion-discbar">
+											<li>
+												<a href="#!/digital-motion" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/digital-motion" rel="living one-sheets"> Living One-Sheets</a>
+											</li>
+											<li>
+												<a href="#!/digital-motion" rel="lower-thirds">Lower-Thirds</a>
+											</li>
+											<li>
+												<a href="#!/digital-motion" rel="takeovers">Takeovers</a>
+											</li>
+											<li>
+												<a href="#!/digital-motion" rel="titles">Titles</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="digital-motion-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- dmotion-block -->
+							<div class="work-sep"></div>
+							<!-- home-block -->
+							<section id="home-entertainment-block" class="work-section">
+								<a id="home-nav" class="work-menu" href="#!/home-entertainment">home entertainment</a>
+								<article id="home-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="home-entertainment-discbar">
+											<li>
+												<a href="#!/home-entertainment" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/home-entertainment" rel="av">AV</a>
+											</li>
+											<li>
+												<a href="#!/home-entertainment" rel="print">Print</a>
+											</li>
+											<li>
+												<a href="#!/home-entertainment" rel="interactive">Interactive</a>
+											</li>
+											<li>
+												<a href="#!/home-entertainment" rel="digital-motion">Digital Motion</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="home-entertainment-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- /home-block -->
+							<!-- broadcast-block -->
+							<section id="broadcast-block" class="work-section">
+								<a id="broadcast-nav" class="work-menu" href="#!/broadcast">broadcast</a>
+								<article id="broadcast-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="broadcast-discbar">
+											<li>
+												<a href="#!/broadcast" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/broadcast" rel="av">AV</a>
+											</li>
+											<li>
+												<a href="#!/broadcast" rel="print">Print</a>
+											</li>
+											<li>
+												<a href="#!/broadcast" rel="interactive">Interactive</a>
+											</li>
+											<li>
+												<a href="#!/broadcast" rel="digital-motion">Digital Motion</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="broadcast-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- /broadcast-block -->
+							<!-- theatrical-block -->
+							<section id="theatrical-block" class="work-section">
+								<a id="theatrical-nav" class="work-menu" href="#!/theatrical">theatrical</a>
+								<article id="theatrical-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="theatrical-discbar">
+											<li>
+												<a href="#!/theatrical" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/theatrical" rel="av">AV</a>
+											</li>
+											<li>
+												<a href="#!/theatrical" rel="print">Print</a>
+											</li>
+											<li>
+												<a href="#!/theatrical" rel="interactive">Interactive</a>
+											</li>
+											<li>
+												<a href="#!/theatrical" rel="digital-motion">Digital Motion</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="theatrical-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- theatrical-block -->
+							<!-- gaming-block -->
+							<section id="gaming-block" class="work-section">
+								<a id="gaming-nav" class="work-menu" href="#!/gaming">gaming</a>
+								<article id="gaming-inner-content" class="subcontent">
+									<nav class="sub-menu">
+										<ul id="gaming-discbar">
+											<li>
+												<a href="#!/gaming" rel="show-all">show all</a>
+											</li>
+											<li>
+												<a href="#!/gaming" rel="av">AV</a>
+											</li>
+											<li>
+												<a href="#!/gaming" rel="print">Print</a>
+											</li>
+											<li>
+												<a href="#!/gaming" rel="interactive">Interactive</a>
+											</li>
+											<li>
+												<a href="#!/gaming" rel="digital-motion">Digital Motion</a>
+											</li>
+										</ul>
+									</nav>
+									<section id="gaming-list" class="section-dynamic-content"></section><!-- end print-list -->
+								</article>
+							</section>
+							<!-- /gaming-block -->
+						</div>
+					</section><!-- end work-inner -->
+				</section>
+				<!-- /Section Work -->
+				<section id="about">
+					<h1 class="title"><a href="#!/website/about">about</a></h1>
+					<section class="inner-content">
+						<header>
+							<p>
+								<strong>The Refinery is an award-winning advertising agency specializing in print, a/v, motion, and interactive campaigns for the entertainment industry.</strong> By combining the intense creativity of a boutique shop with the scalability and service of a much larger team, we're proud to have created what has become one of the select go-to agencies for Theatrical, Broadcast & Home Entertainment clients.
+							</p>
+						</header>
+						<section id="about-wrapper">
+							<div id="about-inner">
+								<section class="about-entry">
+									<h2>Adam Waldman, Partner/Creative Director</h2>
+									<p>
+										Adam Waldman, a Northern California transplant, has over 15 years of experience in entertainment advertising. He began his career at NBC and quickly segued over to the Agency side, in both theatrical and broadcast print design. Since then he's been the creative force behind key art for some of the biggest film franchises of all time. Adam's award-winning career trajectory includes BLT, Concept Arts and Trailer Park Print.
+									</p>
+								</section><!-- end about-entry -->
+								<section class="about-entry">
+									<h2>Brad Hochberg, Partner/Creative Director</h2>
+									<p>
+										Brad Hochberg was born, raised and educated in the arts in Boston, Massachusetts. Upon graduating he headed west to Los Angeles to pursue a design and advertising career, launching that dream at Seiniger Advertising. Over the past twenty years he has had the great pleasure of working alongside the industry's best and brightest award-winning talents at entertainment marketing agencies Poetic Justice, Concept Arts and Trailer Park.
+									</p>
+								</section><!-- end about-entry -->
+								<section class="about-entry">
+									<h2>Brett Winn, AV Division Partner/Creative Director</h2>
+									<p>
+										Brett Winn brings over a decade of award-winning experience producing and editing for filmed entertainment. Launching his career along with the FX Networks, he later worked at the FOX Broadcasting Company and the Studio City agency. He built the broadcast promotion division at Trailer Park, and while there, he transitioned into theatrical trailers and became an award-winning senior editor. He took a short break to co-direct, produce and edit the award-winning feature, My Date with Drew. Then, looking to enhance his marketing perspective, Brett moved to the studio side as a Vice President of Creative Services at Disney Studios. In 2008, Brett opened the doors of the Audio/Visual division of The Refinery.
+									</p>
+								</section><!-- end about-entry -->
+					<!-- <section class="about-entry">
+									<h2>Shawn Ferjanec, AV Division Partner/Creative Director</h2>
+									<p>
+										Shawn has over ten years of industry experience as a Sound Designer, Producer, Editor and Creative Director. While working at Trailer Park and Seismic Productions as an editor, he was nominated numerous times and took home several Key Art and Golden Trailer awards for such trailers as The Hills Have Eyes, Awake and Mission Impossible 3, which won three awards including Best of Show. For three years he was the Creative Director at Create Advertising, where he worked on such campaigns as Iron Man, Tron, Robin Hood, This is It, Hancock, Four Christmases, Up, 2012 and Alice in Wonderland, to name a few. In 2010 he joined forces with Brett Winn to co-lead the Refinery's A/V division.
+									</p>
+									</section>--><!-- end about-entry -->
+								<section class="about-entry">
+									<h2>Jim Pascoe,
+									<br />
+									Creative Director</h2>
+									<p>
+										For the past 20 years, Jim Pascoe has been generating, collaborating on, and executing creative ideas. A specialist in publication and packaging design, he has won multiple Key Art Awards, including a 2010 Best in Show for Coraline. For nearly a decade he ran the independent crime fiction publishing house UglyTown, where he and his partner handled all of the editorial, marketing, and design. He is the author of 13 books and was the creative director/producer on Disney/ABC Cable Network Group's interactive television program JETIX Cards Live, which won a 2004 Emmy Award (Outstanding Achievement in Advanced Media Technology).
+									</p>
+								</section><!-- end about-entry -->
+							</div><!-- end about-inner -->
+						</section><!-- end about-wrapper -->
+					</section><!-- end inner-content -->
+				</section><!-- end about -->
+				<section id="careers">
+					<h1 class="title"><a href="#!/website/careers">careers</a></h1>
+					<section id="careers-inner" class="inner-content">
+						<aside>
+							<p>
+								<strong>we are always interested in meeting new people who love what they do.</strong> if you are an illustrator, photography student, designer, art director, copywriter, web designer, web developer, 3D artist, A/V editor, animator or motion graphics designer we invite you to submit samples of your work. <a id="jobs-link" href="mailto:jobs@therefinerycreative.com">jobs@therefinerycreative.com</a>
+							</p>
+						</aside>
+						<section id="careers-content">
+							<h1> enter <span>the refinery</span> 2011 internship program design contest! </h1>
+							<h2>win a chance for an internship* at award-winning creative agency, the refinery.</h2>
+							<article id="enter-wrapper">
+								<img src="images/careers-banner.jpg" alt="Your Future Begins Here." />
+								<dl>
+									<dt>
+										how to enter
+									</dt>
+									<dd>
+										email <a href="mailto:intern@therefinerycreative.com">intern@therefinerycreative.com</a> if you would like to participate in the contest. a return email will follow with the entry form/InDesign template and film synopsis.
+									</dd>
+									<dd>
+										candidates must submit their completed entry form and poster design in PDF format. <strong>all entries must be received no later than 9/1/2011.</strong>
+									</dd>
+								</dl>
+								<a id="careers-overlay-button" class="terms-link" href="#">*click to see full rules and terms &amp; conditions</a>
+								<div id="careers-overlay">
+									<div class="inner-content-overlay">
+										<p>
+											This competition is intended to expose unrefined talent seeking a paid internship* at The Refinery.
+											<br />
+											If you are a seasoned designer with professional experience seeking an opportunity for employment, please email your portfolio/resume to <a href="mailto:jobs@therefinerycreative.com">jobs@therefinerycreative.com</a>.
+										</p>
+										<p>
+											Email <a href="mailto:intern@therefinerycreative.com">intern@therefinerycreative.com</a> if you would like to participate in the
+											contest. A return email will follow with the entry form/InDesign template,
+											and film synopsis.
+										</p>
+										<p>
+											Candidates must submit their completed entry form and poster design in pdf
+											format.</br>
+											All entries must be received by <a href="mailto:intern@therefinerycreative.com">intern@therefinerycreative.com</a> no
+											later than 9/1/11
+										</p>
+										<p>
+											Design an original theatrical movie poster with an original title treatment.
+										</p>
+										<p>
+											Submit as many entries as you would like, each with its own entry form/pdf.
+										</p>
+										<p>
+											Judging is based on quality of execution, strategy, resourcefulness of asset
+											creation/use and originality/strength of concept.
+										</p>
+										<p>
+											All submissions must be received via email to intern@therefinerycreative.com
+											no later than 9/1/11 9a.m. Incomplete submissions may not be considered.
+										</p>
+										<p>
+											Finalists will be notified by email.
+										</p>
+										<p>
+											Winner will be offered (1) round-trip ticket to LA and (1) night
+											accommodation at a location of our choosing and an interview for possible
+											internship with the owners of The Refinery. Internship* opportunity term
+											subject to change and depend upon the winning candidate’s circumstance. See
+											following pages for details.
+										</p>
+										<br />
+										<br />
+										<p>
+											<h4>EXPANDED RULES</h4>
+											Open only to permanent, legal U.S. residents who are physically residing in
+
+											the United States or the District of Columbia, and who are eighteen (18)
+
+											years of age or older, and of the legal age of majority in their state of
+
+											residence, as of the start of the Contest Period. Each participant must also
+
+											warrant and represent that they meet the all of the following criteria (the
+
+											“Internship Criteria”) as of the start of the Contest Period:
+											<br />
+											(a) They have the legal right to work in the United States of America;
+											<br />
+											(b) They are not subject to any employment or other agreement which would
+
+											interfere with their ability to accept an Internship (as defined below) if
+
+											declared a Winner (as defined below);
+											<br />
+											(c) They are willing to authorize a background check in accordance with
+
+											these Official Rules and applicable law and sign waiver forms authorizing
+
+											the release of your personal and background information;
+											<br />
+											(d) They are willing to sign certain documents to be provided by the
+
+											Refinery at the outset of the Internship, including, but not limited to, an
+
+											application, acknowledgement of Internship conditions, confidentiality and
+
+											property rights agreement, and an acknowledgement of the Refinery’s
+
+											integrity policies;
+											<br />
+											and
+
+											(e) They are willing to abide by all of the Refinery’s workplace and
+
+											corporate policies, procedures, and standards of conduct during the
+
+											Internship and as otherwise applicable.
+											<br />
+										</p>
+										<p>
+											<h4>TO ENTER:</h4>
+											To enter the Contest, log on to www.therefinerycreative.com  (the “Website”)
+
+											during the Contest Period, click on the Contest banner, and follow the
+
+											provided instructions.
+											<br />
+											<br />
+											If at any time during the Contest Period, any of the information provided by
+
+											entrant at the time of entry into the Contest changes, it shall be the
+
+											entrant’s sole responsibility to inform the Refinery of such changes.
+											<br />
+											<br />
+											All Entries become the property of The Refinery and will not be acknowledged
+
+											or returned.
+											<br />
+											<br />
+											By entering the Contest, entrants grant the Refinery the non-exclusive,
+
+											royalty-free, and irrevocable rights to use, reproduce, copy, publish,
+
+											display, distribute, perform, translate, edit, adapt, modify, and otherwise
+
+											exploit the Submitted materials (and all elements thereof) and to
+
+											incorporate the Submitted materials in other works in any and all markets
+
+											and media worldwide in perpetuity. Entrants warrant that they have the sole
+
+											and exclusive right to grant such rights to the Refinery and that the
+
+											Refinery’s reproduction, publishing, displaying, and/or other use of the
+
+											Submitted materials will not infringe on any rights of third parties,
+
+											including, without limitation, copyright, trademark, privacy, or publicity,
+
+											or create claims for defamation, false light, idea misappropriation,
+
+											intentional or negligent infliction of emotional distress, or breach of
+
+											contract. The Submitted materials must not contain any of the following:
+											<br />
+											(a) any material that is obscene, or racially offensive:
+											<br />
+											(b) any personally identifying information about any person (such as phone
+
+											numbers or addresses), including the entrant;
+											<br />
+											(c) any material that would give or threaten to give rise to criminal or
+
+											civil liability.
+											<br />
+											<br />
+											If any Entry does not comply with these Official Rules or meet the
+
+											Refinery’s standards for any reason, as determined by the Refinery in its
+
+											sole discretion, such Entry may be rejected as ineligible for
+
+											consideration. Entries must comply with all applicable laws, rules, and
+
+											regulations. The Refinery shall have no obligation to copy, publish,
+
+											display, or otherwise exploit the Submitted Materials.
+											<br />
+											<br />
+											Entries must be received before April 1, 2011 to be eligible for the
+
+											Contest. Entries that are incomplete, garbled, corrupted, or unintelligible
+
+											for any reason, including, but not limited to, computer or network
+
+											malfunction or congestion, are void and will not be accepted. In case of a
+
+											dispute over the identity of an entrant, the authorized account holder of
+
+											the email address used to enter will be deemed to be the entrant.
+
+											“Authorized account holder” is defined as the person who is assigned to an
+
+											email address by an Internet access provider, online service provider or
+
+											other organization that is responsible for assigning email addresses for the
+
+											domain associated with the submitted email address. Entry constitutes
+
+											permission (except where prohibited by law) to use entrant’s name, city,
+
+											state, likeness, image, and/or voice for purposes of advertising, promotion,
+
+											and publicity in any and all media now or hereafter known, throughout the
+
+											world in perpetuity, without additional compensation, notification,
+
+											permission, or approval.
+										</p>
+										<p>
+											<h4>JUDGING/NOTIFICATION:</h4>
+											<br />
+											A panel comprised of the creative directors of the Refinery selected by the
+
+											Refinery (“Judges”) will review the eligible Entries received during the
+
+											Contest Period and select a potential winner (“Winner”).
+											<br />
+											<br />
+											The review process may occur on a rolling basis as Entries are received.
+
+											Judging will be based on the Submitted Materials as well as any telephone or
+
+											personal interviews or other solicitations for more information that the
+
+											Refinery may elect to conduct.
+											<br />
+											<br />
+											<strong>NOTE:</strong>
+											<br />
+											Any potential entrant, who, due to disability would be unable to receive
+
+											telephonic notices or participate in a telephonic interview with Judges, as
+
+											applicable, may request a reasonable alternative for an accommodation on the
+
+											basis of their disability by faxing a written request to 818-843-0029. Attn:
+
+											Micheal Andrewa that is received no later than April 1, 2011. If a
+
+											reasonable accommodation for disability was requested and approved, any
+
+											interviews will take place in accordance with such reasonable accommodation.
+
+											The Refinery reserves the right to modify any Judging Criteria as necessary
+
+											for any entrants who submit a properly documented and approved request for
+
+											an accommodation on the basis of disability.
+											<br />
+											<br />
+											Decisions of the Refinery and Judges are final and binding with respect to
+
+											all matters related to the Contest. Winning is subject to verification of
+
+											eligibility and the successful completion of any background check to the
+
+											reasonable satisfaction of the Refinery. The Refinery will make two (2)
+
+											attempts to notify potential Winner by email and/or phone, or in accordance
+
+											with any reasonable accommodation for disability as applicable. The Refinery
+
+											reserves the right to pick no potential Winner, or to extend the Contest
+
+											Period if in its sole discretion, the Refinery does not receive a sufficient
+
+											number of eligible and qualified Entries.
+											<br />
+											<br />
+											<strong>PRIZE:</strong>
+											<br />
+											There will be one (1) prize package awarded to the Winner, consisting of:
+
+											(1) a trip (the “Trip”) for the Winner to Los Angeles and an interview for
+
+											an internship with the Refinery (the “Internship”). The Trip and the
+
+											Internship interview shall be referred to herein as the “Prize”.
+											<br />
+											<br />
+											The Trip includes: 1) round-trip coach class domestic air transportation
+
+											from a major U.S. gateway airport nearest Winner’s residence (as determined
+
+											by the Refinery in its sole discretion) to one of the major gateway airports
+
+											nearest Los Angeles, California (as determined by the Refinery in its sole
+
+											discretion); 2) one (1) night hotel accommodations in a Los Angeles,
+
+											California metropolitan area hotel (standard room, double occupancy), as
+
+											determined by the Refinery in its sole discretion. Estimated Retail Value
+
+											(“ERV”) of Trip is one thousand dollars ($1,000). Actual value may vary
+
+											depending on city of departure and dates of travel.
+											<br />
+											<br />
+											The Internship will commence at a time convenient to The Refinery and the
+
+											Winner and continue for at least twelve (12) weeks, or as of a date and for
+
+											a length of time as otherwise determined by the Refinery in consultation
+
+											with Winner, being mindful of Winner’s academic calendar. For the avoidance
+
+											of doubt, Winner agrees that the Internship will be: (a) subject to Winner’s
+
+											compliance with the Refinery’s workplace and corporate policies (including,
+
+											without limitation, compliance guidelines, sexual harassment and other
+
+											similar policies, (b) an internship for which Winner will receive college
+
+											credit in accordance with the policies of Winner’s college or university,
+
+											(c) paid a stipend by The Refinery. The Refinery will not be responsible for
+
+											Winner’s room and board during the Internship or any other expenses (except
+
+											as specifically set forth above) associated with the Internship. The
+
+											Internship has no cash value.
+											<br />
+											<br />
+											The total ERV of Prize is One Thousand dollars ($1,000).
+											<br />
+											<br />
+											The Refinery will determine all details of Prize in its sole discretion
+
+											including scope of Internship duties. Travel arrangements must be made
+
+											through the Refinery’s agent, on a carrier of the Refinery’s choice. Winner
+
+											must travel on scheduled departure date and return date, and must have valid
+
+											travel documents (e.g., valid government issued photo ID and/or passport)
+
+											prior to departure. Failure to secure the necessary travel documents may
+
+											result in forfeiture of Prize. The Refinery reserve the right to substitute
+
+											a similar Prize (or Prize element) of comparable or greater value in their
+
+											sole discretion. All taxes and other expenses, costs, or fees associated
+
+											with the acceptance and/or use of Prize are the sole responsibility of
+
+											Winner. Prize cannot be transferred by Winner or redeemed for cash and is
+
+											valid only for the items detailed above, with no substitution of Prize by
+
+											Winner. If Prize is unclaimed within a reasonable time after notification
+
+											from the Refinery, or if Winner is unable to utilize Trip portion of the
+
+											Prize, as determined by Sponsors in their sole discretion, Prize will be
+
+											forfeited, and at the Refinery’s sole discretion and time permitting, the
+
+											runner-up entrant with the next highest points based on the Judging Criteria
+
+											may be selected as an alternate potential Winner.
+											<br />
+											<br />
+											Exact travel dates will be determined by the Refinery in their sole
+
+											discretion. Travel and hotel arrangements will be determined by the Refinery
+
+											in its sole discretion. Once determined, no change, extension, or
+
+											substitution of travel dates and/or times is permitted, except by the
+
+											Refinery in its sole discretion. Prize consists only of the elements set
+
+											forth above. No other travel elements (including, without limitation,
+
+											insurance, gasoline, meals, gratuities, and souvenirs are included in
+
+											Prize. Tickets will be issued only to Winner. Tickets are void if sold for
+
+											cash or other consideration. Winner is responsible for any income tax
+
+											liability. Once issued, tickets are non-transferable and may not be reissued
+
+											once travel has commenced. All travel will be at the risk of Winner.
+
+											The Refinery shall have no responsibility or liability for cancellations,
+
+											delays, or any other change by any company or person providing any element
+
+											of Prize due to reasons beyond the Refinery’s control, and are not
+
+											responsible or liable for any expenses incurred as a consequence thereof.
+											<br />
+											height: 500px;
+											overflow-y: scroll; <strong>CONDITIONS:</strong>
+											<br />
+											By entering the Contest, each entrant agrees for entrant and for entrant’s
+
+											heirs, executors, and administrators: (a) to release and hold harmless
+
+											Contest Entities and their respective officers, directors, and employees
+
+											(collectively, “Released Parties”) from any liability, illness, injury,
+
+											death, loss, litigation, or damage that may occur, directly or indirectly,
+
+											whether caused by negligence or not, from (1) such entrant’s participation
+
+											in the Contest and/or his/her acceptance, possession, use, misuse or
+
+											inability to use Prize or any portion or component thereof (including any
+
+											travel related thereto and/or any activities/assignments relating to the
+
+											Internship), (2) ambiguous Judging Criteria, or (3) any third party’s
+
+											ability or inability to access, modify, republish, copy, create mash-ups
+
+											from or otherwise modify the entrants’ Submitted Materials; (b) to indemnify
+
+											Released Parties from any and all liability resulting or arising from the
+
+											Contest and to hereby acknowledge that Released Parties have neither made
+
+											nor are in any manner responsible or liable for any warranty,
+
+											representation, or guarantee, express or implied, in fact or in law,
+
+											relative to Prize; (c) if selected as a Winner, to the posting of such
+
+											entrant’s name on the Website and the use by Released Parties of such name,
+
+											voice, image, and/or likeness for publicity, promotional, and advertising
+
+											purposes in any and all media now or hereafter known, throughout the world
+
+											in perpetuity, without additional compensation, notification, permission, or
+
+											approval, and, upon request, to the giving of consent (by such entrant’s
+
+											parent or legal guardian if the entrant is a minor in his or her state of
+
+											residence), in writing, to such use; and (d) to be bound by these Official
+
+											Rules and to waive any right to claim any ambiguity or error therein or in
+
+											the Contest itself, and to be bound by all decisions of the Refinery, which
+
+											are final and binding. Failure to comply with these conditions may result in
+
+											disqualification from the Contest at the Refinery’s sole discretion.
+											<br />
+											<br />
+											<strong>ADDITIONAL TERMS:</strong>
+											<br />
+											The Refinery reserve the right to permanently disqualify from any promotion
+
+											any person they believe has intentionally violated these Official Rules. Any
+
+											attempt to deliberately damage the Contest or the operation thereof is
+
+											unlawful and subject to legal action by the Refinery, who may seek damages
+
+											to the fullest extent permitted by law. The failure of the Refinery to
+
+											comply with any provision of these Official Rules due to an act of God,
+
+											hurricane, war, fire, riot, earthquake, terrorism, act of public enemies,
+
+											actions of governmental authorities outside of the control of the Refinery
+
+											(excepting compliance with applicable codes and regulations), or other
+
+											“force majeure” event will not be considered a breach of these Official
+
+											Rules. Released Parties assume no responsibility for any injury or damage to
+
+											entrants’ or to any other person’s computer relating to or resulting from
+
+											entering or downloading materials or software in connection with the
+
+											Contest. Released Parties are not responsible for telecommunications,
+
+											network, electronic, technical, or computer failures of any kind; for
+
+											inaccurate transcription of entry information; for errors in any promotional
+
+											or marketing materials or in these Official Rules; for any human or
+
+											electronic error; or for Entries that are stolen, misdirected, garbled,
+
+											delayed, forged, deleted, lost, late, damaged, or returned. The Refinery
+
+											reserves the right to cancel, modify, or suspend the Contest or any element
+
+											thereof (including, without limitation, these Official Rules) without notice
+
+											in any manner and for any reason (including, without limitation, in the
+
+											event of any unanticipated occurrence that is not fully addressed in these
+
+											Official Rules).In the event of cancellation, modification, or suspension,
+
+											the Refinery reserves the right to select a Winner from among all eligible,
+
+											non-suspect Entries received prior to the time of the event warranting such
+
+											cancellation, modification, or suspension based on the Judging
+
+											Criteria. Notice of such cancellation, modification, or suspension will be
+
+											posted on the Website. The Refinery may prohibit any entrant or potential
+
+											entrant from participating in the Contest, if such entrant or potential
+
+											entrant shows a disregard for these Official Rules; acts with an intent to
+
+											annoy, abuse, threaten, or harass any other entrant, the Refinery, or the
+
+											Refinery’s agents or representatives; or behaves in any other disruptive
+
+											manner (as determined by the Refinery in their sole discretion).
+											<br />
+											<br />
+											<strong>DISPUTES:</strong>
+											<br />
+											THE CONTEST IS GOVERNED BY, AND WILL BE CONSTRUED IN ACCORDANCE WITH, THE
+
+											LAWS OF THE STATE OF CALIFORNIA, AND THE FORUM AND VENUE FOR ANY DISPUTE
+
+											SHALL BE IN LOS ANGELES, CALIFORNIA. IF THE CONTROVERSY OR CLAIM IS NOT
+
+											OTHERWISE RESOLVED THROUGH DIRECT DISCUSSIONS OR MEDIATION, IT SHALL THEN BE
+
+											RESOLVED BY FINAL AND BINDING ARBITRATION ADMINISTERED BY JUDICIAL
+
+											ARBITRATION AND MEDIATION SERVICES, INC., IN ACCORDANCE WITH ITS STREAMLINED
+
+											ARBITRATION RULES AND PROCEDURES OR SUBSEQUENT VERSIONS THEREOF (“JAMS
+
+											RULES”). THE JAMS RULES FOR SELECTION OF AN ARBITRATOR SHALL BE FOLLOWED,
+
+											EXCEPT THAT THE ARBITRATOR SHALL BE EXPERIENCED AND LICENSED TO PRACTICE LAW
+
+											IN CALIFORNIA. ALL PROCEEDINGS BROUGHT PURSUANT TO THIS PARAGRAPH WILL BE
+
+											CONDUCTED IN LOS ANGELES, CALIFORNIA. THE REMEDY FOR ANY CLAIM SHALL BE
+
+											LIMITED TO ACTUAL DAMAGES, AND IN NO EVENT SHALL ANY PARTY BE ENTITLED TO
+
+											RECOVER PUNITIVE, EXEMPLARY, CONSEQUENTIAL, OR INCIDENTAL DAMAGES, INCLUDING
+
+											ATTORNEY’S FEES OR OTHER SUCH RELATED COSTS OF BRINGING A CLAIM, OR TO
+
+											RESCIND THIS AGREEMENT OR SEEK INJUNCTIVE OR ANY OTHER EQUITABLE RELIEF.
+											<br />
+											<br />
+											<strong>WINNER ANNOUNCEMENT:</strong>
+											For the name of the Winner, contact intern@therefinerycreative.com
+											<br />
+											<br />
+											<strong>ABOUT “THE MOVIE”:</strong>
+											The title and its stated plot are completely fictional and used solely for
+
+											the purpose of this competition as a subject for which one may design a
+
+											fictional movie poster. Any real or implied correlation to anything
+
+											produced, about to be produced, or otherwise conceived of by any other
+
+											individual or company is purely coincidental. The use of the movie plot and
+
+											title on the part of The Refinery ends with the Internship Design Program
+
+											Competition.
+										</p>
+									</div>
+									<a class="close-current-overlay" href="#">close</a>
+								</div><!-- end careers-overlay -->
+							</article>
+						</section><!-- end careers-content -->
+					</section><!-- end inner-content -->
+				</section><!-- end careers -->
+				<section id="contact">
+					<h1 class="title"><a href="#!/website/contact">contact</a></h1>
+					<section id="contact-content">
+						<section class="contact-info">
+							<header>
+								<h3>the refinery</h3>
+							</header>
+							<div id="contact-details">
+							<h5>Refinery East Campus</h5>
+								<p>
+									115 north hollywood way
+									<br />
+									burbank, ca 91505
+									<br />
+									<a id="click-map" href="http://maps.google.com/maps?q=The+Refinery,+Burbank,+CA&hl=en&sll=37.0625,-95.677068&sspn=33.489543,69.257812&vpsrc=0&z=13" target="_blank">(click for map)</a>
+									
+								</p>
+									<h5 class="last">Refinery West Campus</h5>
+								<p>
+									4220 lankershim blvd
+
+									<br />
+									los angeles, ca 91602
+									<br />
+									<a id="click-map" href="http://maps.google.com/maps?q=4220+lankershim+blvd.+los+angeles,+ca+91602&hl=en&sll=37.0625,-95.677068&sspn=33.489543,69.257812&vpsrc=0&z=16" target="_blank">(click for map)</a>
+									
+								</p>
+								<ul>
+									<li id="phone-number">
+										<span></span>
+										+1 818.843.0004
+									</li>
+									<li id="fax-number">
+										<span></span>
+										+1 818.843.0029
+									</li>
+									<li id="email-address">
+										<span></span>
+										info@therefinerycreative.com
+									</li>
+								</ul>
+							</div>
+							<div id="map-wrapper">
+								<img src="images/contact-map.png" />
+							</div>
+						</section><!-- end contact-info -->
+						<section class="contact-form">
+							<header>
+								<h3>send us a message</h3>
+							</header>
+							<form id="contact-form" action="backend/mailer.php" method="POST">
+								<div class="float-left">
+									<label for="fname"> first name </label>
+									<input name="fname" type="text" id="fname" />
+									<label for="lname"> last name </label>
+									<input name="lname" type="text" id="lname" />
+									<label for="yemail"> your email </label>
+									<input name="yemail" type="text" id="yemail" />
+								</div>
+								<div class="float-right">
+									<label for="message"> message </label>
+									<textarea name="message"></textarea>
+									<div class="checkbox-wrapper">
+										<input name="self_message" type="checkbox" />
+										send a copy of this message to yourself
+									</div>
+									<input type="submit" id="send-button" name="send" value="send" />
+								</div>
+							</form>
+						</section><!-- end contact-form -->
+					</section><!-- end contact-content -->
+				</section><!-- end contact -->
+			</section><!-- end content-wrapper -->
+			<!-- Fitler panel -->
+			<section id="filter-panel">
+				<div id="filter-inner">
+					<div id="filter-row">
+						<section id="filter-content"></section><!-- end filter-content -->
+						<section id="filter-trigger"></section><!-- end filter trigger -->
+					</div>
+				</div><!-- end fillter-inner -->
+			</section>
+			<!-- /Fitler panel -->
+		</div><!-- end container -->
+		
+		
+		<!-- Search overlay -->
+		<div id="search-wrap">
+			<h2>search results<span id="close-search-wrap">close</span></h2>
+			<div class="clear"></div>
+			
+			<div id="search-results"></div>
+		</div>
+		<!-- /Search overlay -->
+		
+		
+		<!-- Overlay -->
+		<div id="overlay" style="display:none">
+			<div id="overlay-left">
+				<div id="other-wrapper">
+					<div class="overlay-block">
+						<ul class="overlay-list">
+							<li>
+								<a href="#"> <img src="images/mad-men-01.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-01.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-01.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-01.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-01.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-01.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-02.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-02.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-02.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-03.jpg" alt="mad men" /> </a>
+							</li>
+							<li>
+								<a href="#"> <img src="images/mad-men-04.jpg" alt="mad men" /> </a>
+							</li>
+						</ul>
+						<h1>other madmen</h1>
+					</div><!-- end overlay-block -->
+				</div><!-- end other-wrapper -->
+				<div id="tv-spots">
+					<div class="overlay-block">
+						<h1>tv spots</h1>
+						<ul>
+							<li>
+								<img src="images/img-tv.jpg" />
+							</li>
+							<li>
+								<img src="images/img-tv.jpg" />
+							</li>
+						</ul>
+					</div><!-- end overlay-block -->
+				</div><!-- end tv-spots -->
+				<div id="banner">
+					<div class="overlay-block">
+						<h1>banner campaigns</h1>
+						<ul>
+							<li>
+								<img src="images/banner.jpg" />
+							</li>
+							<li>
+								<img src="images/banner.jpg" />
+							</li>
+						</ul>
+					</div><!-- end overlay-block -->
+				</div><!-- end banner -->
+				<div id="related-work">
+					<div class="overlay-block">
+						<h1>related work</h1>
+						<ul>
+							<li>
+								<img src="images/related.jpg" />
+								<img src="images/related-2.jpg" />
+								<img src="images/related-2.jpg" />
+							</li>
+							<li>
+								<img src="images/related.jpg" />
+								<img src="images/related-2.jpg" />
+								<img src="images/related-2.jpg" />
+							</li>
+						</ul>
+					</div><!-- end overlay-block -->
+				</div><!-- end related-work -->
+				<div id="share-wrapper">
+					<div class="overlay-block">
+						<h1>share</h1>
+						<ul>
+							<li>
+								<a href="#">email</a>
+							</li>
+							<li>
+								<a href="#">embed</a>
+							</li>
+							<li class="sep"></li>
+							<li>
+								<a class="facebook" href="#">facebook</a>
+							</li>
+							<li>
+								<a class="twitter" href="#">twitter</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- end share-wrapper -->
+			</div><!-- end overlay-left -->
+			<div id="overlay-content"></div>
+			<!-- /Overlay -->
+			<!--<script type="text/javascript" src="javascripts/jquery-1.5.2.min.js"></script>-->
+			<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js" type="text/javascript"></script> -->
+			<script type="text/javascript" src="javascripts/jquery-1.6.2.min.js"></script>
+			<script type="text/javascript" src="javascripts/jquery-ui.min.js"></script>
+			<script src="javascripts/jquery.easing.1.3.js" type="text/javascript"></script>
+			<!--<script src="javascripts/jquery-ui.min.js" type="text/javascript"></script>-->
+			<!-- jScrollpane -->
+			<script type="text/javascript" src="javascripts/jquery.mousewheel.js"></script>
+			<script type="text/javascript" src="javascripts/jquery.jscrollpane.min.js"></script>
+			<!-- /jScrollpane -->
+			<script type="text/javascript" src="javascripts/jquery.bxSlider.js"></script>
+			<script type="text/javascript" src="javascripts/refinery.js"></script>
+			<script type="text/javascript" src="javascripts/search.js"></script>
+			<script type="text/javascript" src="javascripts/underscore-min.js"></script>
+			<script type="text/javascript" src="javascripts/backbone.js"></script>
+			<script type="text/javascript" src="javascripts/models.js"></script>
+			<script type="text/javascript" src="javascripts/views.js"></script>
+			<script type="text/javascript" src="javascripts/routers.js"></script>
+			<script type="text/javascript" src="javascripts/sectionize.js"></script>
+			<script type="text/javascript" src="javascripts/application.js"></script>
+			<script type="text/javascript" src="javascripts/jquery.form.js"></script>
+			<script type="text/javascript" src="video.js"></script>
+			<script>
+				$(function() {
+					// test browser support for html5 video
+					if(!Modernizr.video) {
+						$('#video-wrapper').hide();
+						$('#no-video').show();
+					}
+
+					$("#login-dropdown, #employee-login").click(function() {
+						return false;
+					})
+					// login hover
+					$('#header-inner.active').find("#login-dropdown").live('hover', function() {
+						$(this).next().fadeIn('fast').show();
+
+						$(this).parent().hover(function() {
+						}, function() {
+							$(this).parent().find(".login-dropdown-wrapper").fadeOut('slow');
+						});
+						return false;
+					}, function() {
+
+					});
+					//employee-login
+					$('#header-inner.active').find("#employee-login").live('hover', function() {
+						$(this).next().fadeIn('fast').show();
+
+						$(this).parent().hover(function() {
+						}, function() {
+							$(this).parent().find(".login-dropdown-wrapper").fadeOut('slow');
+						});
+						return false;
+					}, function() {
+
+					});
+					// firefox video loop
+					$('#video').bind('ended', function() {
+						$('#btn-showsite').trigger('click');
+					});
+					$('#careers-overlay-button').click(function() {
+						// careers popup
+						$('#careers-overlay').dialog({
+							width : 800
+						});
+						return false;
+					});
+					$('.close-current-overlay').click(function() {
+						$('#careers-overlay').dialog('close');
+						return false;
+					});
+				});
+				// contact form email
+
+				function validateFields(formData, jqForm, options) {
+					for(var i = 1; i < formData.length; i += 1) {
+						if(!formData[i].value) {
+							alert("Please fill in all details");
+							return false;
+						}
+					}
+					return true;
+				}
+
+				function showMailResponse(responseText, statusText, xhr, $form) {
+					if(responseText == "success") {
+						$('#contact-form')[0].reset();
+						alert('Message sent');
+					}
+				}
+
+				$(document).ready(function() {
+					$('#contact-form').ajaxForm({
+						beforeSubmit : validateFields,
+						success : showMailResponse
+					});
+					
+					
+				});
+
+				$(document).ready(function(){
+					$('.bx-next').click(function(){
+						$('#overlay video').each(function(){
+							$(this).player.pause();
+						});
+						alert('clicked');
+						return false;
+					});
+
+					$('.bx-prev').click(function(){
+						$('#overlay video').each(function(){
+							$(this).player.pause();
+						});
+						return false;
+					});
+				});
+				
+
+			</script>
+	</body>
+</html>
