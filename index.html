@@ -1071,7 +1071,7 @@
 		
 		<!-- Search overlay -->
 		<div id="search-wrap">
-			<h2><span id="close-search-wrap">close</span>Search</h2>
+			<h2>search results<span id="close-search-wrap">close</span></h2>
 			<div class="clear"></div>
 			
 			<div id="search-results"></div>
@@ -1214,8 +1214,7 @@
 			<script>
 				$(function() {
 					// test browser support for html5 video
-					if(Modernizr.video) {
-					} else {
+					if(!Modernizr.video) {
 						$('#video-wrapper').hide();
 						$('#no-video').show();
 					}
@@ -1249,7 +1248,7 @@
 					});
 					// firefox video loop
 					$('#video').bind('ended', function() {
-						this.play();
+						$('#btn-showsite').trigger('click');
 					});
 					$('#careers-overlay-button').click(function() {
 						// careers popup
