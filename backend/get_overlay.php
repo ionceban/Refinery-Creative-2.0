@@ -158,9 +158,11 @@
 			$temp_height = 550;
 			$temp_width = intval(($temp_height * $old_width) / $old_height);
 		}
+
+		$top_margin = intval((550 - $temp_height) / 2);
 		
 		$response .= "<img src='" . $PROJS_PATH . $row[1] . "' style='width: " . $temp_width . "px; height: ";
-		$response .= $temp_height . "px' />";
+		$response .= $temp_height . "px; margin-top:" . $top_margin . "px' />";
 	} else {
 		$video_attrs = preg_split('/\./', $row[1]);
 		$response .= "<div class='video-container' >";
@@ -195,8 +197,10 @@
 					$temp_width = intval(($temp_height * $old_width) / $old_height);
 				}
 				
+				$top_margin = intval((550 - $temp_height) / 2);
+				
 				$response .= "<img src='" . $PROJS_PATH . $image_array['name'][$i] . "' style='width: " . $temp_width . "px; height: ";
-				$response .= $temp_height . "px' />";
+				$response .= $temp_height . "px; margin-top: " . $top_margin . "px' />";
 			} else {
 				$video_attrs = preg_split('/\./', $image_array['name'][$i]);
 				$response .= "<div class='video-container'>";
