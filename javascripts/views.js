@@ -23,7 +23,6 @@ Refinery.View.Sections = Backbone.View.extend({
 	
 	render: function(section, params) {
 		this.openSection(section, params);
-		
 		if(!this.filters_section) {
 			this.filters_section = new Refinery.View.SectionsFilter();
 		}
@@ -32,29 +31,34 @@ Refinery.View.Sections = Backbone.View.extend({
 	
 	openSection: function(section, params) {
 		var $elem = this.el.find('#' + section + '-block').find('a.work-menu');
+		var el_section = $elem.attr('href').replace('#!/', '');
+		
 		if((params && !$elem.hasClass('active')) || !$elem.hasClass('active')) {
-			$elem.click();
+			// activate this only on page load
+			cl('> openSection')
+			if(this.current_section == null) {
+				this.current_section = el_section;
+				Sectionize.toggle($elem[0]);
+			}
 		}
 	},
 	
+	
 	toggleSection: function(evt) {
-		var self = this;
 		var el_section = $(evt.target).attr('href').replace('#!/', '');
 		
-		if(Sectionize.isAnimating()) {
-			return false;
-		}
-		
-		Sectionize.toggle(evt.target, {
-			before: function() { },
-			after: function(elem, state) { }
-		});
+		//cl('section:: ', el_section)
+		//cl('curr_section:: ', this.current_section)
 		
 		if(this.current_section == el_section) {
+			cl('> toggleSection :: same section')
+			window.location = '#!/';
 			this.current_section = null;
+			Sectionize.reset(evt.target);
 			return false;
 		} else {
-			console.log('should load bar for section ' + el_section);
+			cl('> toggleSection :: else')
+			Sectionize.toggle(evt.target);
 			$.ajax({
 				url: "backend/get_disciplines_bar.php",
 				type: "POST",
@@ -233,7 +237,6 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	},
 	
 	initialize: function() {
-		cl('initialize:: filter tab');
 		_.extend(this, Backbone.Events);
 	},
 	
@@ -309,9 +312,8 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 		this.options.parent.loadSectionContent(this.current_section, this.filters, function(content) {
 			$section.find('.section-dynamic-content').html(content)
 			$section.find('.subcontent').attr('class', 'subcontent-active');
-			$('body, html').animate({scrollTop: 0}, function() {
-				self.animateContent($section)
-			});
+			// here be bugs
+			self.animateContent($section)
 		});
 	},
 	
@@ -479,7 +481,7 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	 * Animates the show/hide content process
 	 */
 	animateContent: function(section) {
-		$(section).find('.subcontent-active').animate(
+		$(section).find('.subcontent-active').show().animate(
 			{'opacity': 1},
 			{
 				easing: 'easeInOutQuint',
