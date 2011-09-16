@@ -398,15 +398,10 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	 * Clears all the filters
 	 */
 	clearFilters: function() {
-		cl(this.current_params)
-		cl(this.filters)
-		
-		
 		var filter_types = ['discipline', 'deliverable', 'keywords', 'year'];
 		for(var i = 0; i < filter_types.length; i++) {
-			this.filters[filter_types[i]] = 'show-all';
+			this.filters[filter_types[i]][0] = 'show-all';
 		}
-		
 		this.clearLocation();
 	},
 	
@@ -433,7 +428,6 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 				current_filter.push('show-all');
 		}
 		this.filters[filter_type] = current_filter;
-		//cl(this.filters[filter_type])
 	},
 	
 	/**
@@ -449,14 +443,12 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	 */
 	changeLocation: function(filter_type) {
 		var url = '#!/';
-		
 		if(!filter_type || typeof(filter_type) === 'undefined') {
 			url += this.current_section;
 		} else {
 			var filters = Refinery.Filters.replaceSegmentFilter(filter_type, this.filters[filter_type], this.current_params);
 			url += this.current_section + '/' + filters;
 		}
-		
 		window.location = url;
 	},
 	
