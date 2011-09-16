@@ -36,9 +36,14 @@ Refinery.View.Sections = Backbone.View.extend({
 		if((params && !$elem.hasClass('active')) || !$elem.hasClass('active')) {
 			// activate this only on page load
 			cl('> openSection')
+			//cl(this.current_section)
+			
 			if(this.current_section == null) {
 				this.current_section = el_section;
 				Sectionize.toggle($elem[0]);
+			} else {
+				this.current_section = null;
+				$elem.click();
 			}
 		}
 	},
