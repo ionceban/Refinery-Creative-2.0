@@ -38,13 +38,13 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 		// close and reset the search wrap
 		LiveSeek.destruct();
 		
-		$('body, html').animate({scrollTop: 0});
+		//$('body, html').animate({scrollTop: 0});
 		
 		// clears the "web" sections
 		this._clearWebSections();
 		
 		// in here there is a DAMN problem
-		//Sectionize.reset();
+		Sectionize.closeAll();
 		
 		// abort section content render
 		this._abortSectionRender();
@@ -66,11 +66,12 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * MAJOR PROBLEMS HERE
 	 */
 	viewWebsiteMains: function(subsection) {
+		//cl('viewWebsiteMains')
 		// close and reset the search wrap
 		LiveSeek.destruct();
 		
 		// Goes to the specific websection
-		Sectionize.reset(function() {
+		Sectionize.closeAll(function() {
 			webSections.reactTo(subsection);
 		});
 		
@@ -97,9 +98,10 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * Shows only the section without the filters
 	 */
 	showSection: function(section) {
+		//cl('showSection()')
+		
 		// close and reset the search wrap
 		LiveSeek.destruct();
-	
 	
 		// clears the "web" sections
 		this._clearWebSections();
@@ -123,14 +125,15 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * Show the section along with the filters
 	 */
 	showFilteredSection: function(section, params) {
+		//cl('showFilteredSection')
 		// clears the "web" sections
 		this._clearWebSections();
 		
 		// Render the actual sections - slides and section filters
-		if(!this.views.sections) {
-			this.views.sections = new Refinery.View.Sections();
-		}
-		this.views.sections.render(section, params);
+		//if(!this.views.sections) {
+		//	this.views.sections = new Refinery.View.Sections();
+		//}
+		//this.views.sections.render(section, params);
 		
 		// Render the filter menu
 		if(!this.views.filter_menu) {
@@ -242,11 +245,12 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 						$('#container').css({ 'padding-top': 64, 'height': 'auto' });
 						$('#header').css({ 'position': 'fixed', 'top': 0 });
 						
+						$('#push-content').remove();
+						
 						$('#content-wrapper').css({ 'display': 'block' }).animate({ 'opacity': 1 }, 300, function() {
 							if(options && options.after)
 								options.after.call(options.after);
 						});
-						$('#push-content').remove();
 					}
 				});
 			});
