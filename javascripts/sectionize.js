@@ -46,10 +46,12 @@ var Sectionize = (function() {
 	 * closes a section
 	 */
 	var closeSection = function(elem) {
-		$(elem).next('.subcontent-active').hide().find('.section-dynamic-content').empty();
+		$(elem).next('.subcontent-active').fadeOut(500, function() {
+			$(this).attr('class', 'subcontent').find('.section-dynamic-content').empty();
+		})
 		currentElement = null;
-		window.location = '#!/';
 		scrollTo(0);
+		window.location = '#!/';
 	}
 	
 	/**
@@ -57,17 +59,19 @@ var Sectionize = (function() {
 	 */
 	var openSection = function(elem) {
 		if(currentElement) {
-			$(currentElement).next('.subcontent-active').fadeOut(250).animate(
-				{'opacity': 0},
-				{
-					easing: 'easeInOutExpo',
-					duration: 500,
-					complete: function() {
-						$(this).find('.section-dynamic-content').empty();
-						scrollTo(getOffset(elem));
+			$(currentElement).next('.subcontent-active').fadeOut(250, function() {
+				$(this).attr('class', 'subcontent').animate(
+					{'opacity': 0},
+					{
+						easing: 'easeInOutExpo',
+						duration: 750,
+						complete: function() {
+							$(this).find('.section-dynamic-content').empty();
+							scrollTo(getOffset(elem));
+						}
 					}
-				}
-			);
+				);
+			})
 		} else {
 			scrollTo(getOffset(elem));
 		}
@@ -77,11 +81,7 @@ var Sectionize = (function() {
 	
 	var scrollToElement = function(elem) {
 		var elemOffset = getOffset(elem);
-		//if(currentElement == elem && ($(currentElement).attr('href') == window.location.hash)) {
-		//	closeSection(elem);
-		//} else {
-			openSection(elem);
-		//}
+		openSection(elem);
 	}
 	
 	// Public
@@ -91,7 +91,31 @@ var Sectionize = (function() {
 		},
 		
 		reset: function(elem) {
+			cl('Sectionize.reset()')
 			resetScroll(elem);
+		},
+		
+		closeAll: function(cb) {
+			if(currentElement == null) {
+				if(cb && typeof(cb) !== 'undefined') {
+					cb.call(this);
+				}
+				return false;
+			}
+			
+			$('#dummy-work-inner')
+			.find('.subcontent-active')
+			.hide()
+			.attr('class', 'subcontent')
+			.find('.section-dynamic-content')
+			.empty().after(function() {
+				if(cb) {
+					scrollTo(0, function() {
+						cb.call(this);
+					});
+				}
+			});
+			currentElement = null;
 		}
 	}
 })();
