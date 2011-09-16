@@ -39,9 +39,14 @@ Refinery.View.Sections = Backbone.View.extend({
 			//cl(this.current_section)
 			
 			if(this.current_section == null) {
+				cl('== null')
 				this.current_section = el_section;
 				Sectionize.toggle($elem[0]);
 			} else {
+				if(this.current_section == el_section) {
+					return;
+				}
+				cl('not null')
 				this.current_section = null;
 				$elem.click();
 			}
@@ -62,7 +67,7 @@ Refinery.View.Sections = Backbone.View.extend({
 			Sectionize.reset(evt.target);
 			return false;
 		} else {
-			cl('> toggleSection :: else')
+			cl('> toggleSection :: else');
 			Sectionize.toggle(evt.target);
 			$.ajax({
 				url: "backend/get_disciplines_bar.php",
@@ -393,13 +398,16 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	 * Clears all the filters
 	 */
 	clearFilters: function() {
-		var filter_types = ['discipline', 'deliverable', 'keywords', 'year'];
+		cl(this.current_params)
+		cl(this.filters)
 		
+		
+		var filter_types = ['discipline', 'deliverable', 'keywords', 'year'];
 		for(var i = 0; i < filter_types.length; i++) {
-			this.filters[filter_types[i]] = null;
+			this.filters[filter_types[i]] = 'show-all';
 		}
 		
-		this.changeLocation();
+		this.clearLocation();
 	},
 	
 	/**
@@ -407,7 +415,7 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 	 */
 	elementFilterize: function(filter_type, elem_filter) {
 		var current_filter = this.filters[filter_type];
-		var filter_value = elem_filter//Refinery.Filters.encodeString(elem_filter);
+		var filter_value = elem_filter; //Refinery.Filters.encodeString(elem_filter);
 		
 		if(filter_value == 'show-all') {
 			current_filter.splice(0);
@@ -426,6 +434,14 @@ Refinery.View.FilterMenu = Backbone.View.extend({
 		}
 		this.filters[filter_type] = current_filter;
 		//cl(this.filters[filter_type])
+	},
+	
+	/**
+	 * clears the location and shit
+	 */
+	clearLocation: function() {
+		var url = '#!/' + this.current_section // + '/' + '?index=show-all';
+		window.location = url;
 	},
 	
 	/**
