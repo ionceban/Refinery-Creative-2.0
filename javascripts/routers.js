@@ -130,10 +130,10 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 		this._clearWebSections();
 		
 		// Render the actual sections - slides and section filters
-		//if(!this.views.sections) {
-		//	this.views.sections = new Refinery.View.Sections();
-		//}
-		//this.views.sections.render(section, params);
+		if(!this.views.sections) {
+			this.views.sections = new Refinery.View.Sections();
+		}
+		this.views.sections.render(section, params);
 		
 		// Render the filter menu
 		if(!this.views.filter_menu) {
