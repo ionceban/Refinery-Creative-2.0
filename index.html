@@ -1071,17 +1071,6 @@
 			<!-- /Fitler panel -->
 		</div><!-- end container -->
 		
-		
-		<!-- Search overlay -->
-		<div id="search-wrap">
-			<h2>search results<span id="close-search-wrap">close</span></h2>
-			<div class="clear"></div>
-			
-			<div id="search-results"></div>
-		</div>
-		<!-- /Search overlay -->
-		
-		
 		<!-- Overlay -->
 		<div id="overlay" style="display:none">
 			<div id="overlay-left">
@@ -1251,7 +1240,7 @@
 					});
 					// firefox video loop
 					$('#video').bind('ended', function() {
-						//$('#btn-showsite').trigger('click');
+						$('#btn-showsite').trigger('click');
 					});
 					$('#careers-overlay-button').click(function() {
 						// careers popup
