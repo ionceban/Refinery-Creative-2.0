@@ -1105,7 +1105,7 @@ strong {
 /*
 	Search overlay
 */
-#search-wrap {
+/*#search-wrap {
 	display:none;
 	margin:63px auto 0 auto;
 	width:970px;
@@ -1117,6 +1117,10 @@ strong {
 	z-index:999;
 	background-color:#fff;
 	border-bottom:1px solid red;
+}*/
+
+#search-wrap {
+	display:none;
 }
 	#search-wrap h2 {
 		color: #4849b5;
