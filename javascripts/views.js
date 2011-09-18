@@ -39,14 +39,13 @@ Refinery.View.Sections = Backbone.View.extend({
 			//cl(this.current_section)
 			
 			if(this.current_section == null) {
-				cl('== null')
 				this.current_section = el_section;
 				Sectionize.toggle($elem[0]);
+				loadDisciplineBar(el_section);
 			} else {
 				if(this.current_section == el_section) {
 					return;
 				}
-				cl('not null')
 				this.current_section = null;
 				$elem.click();
 			}
@@ -57,30 +56,29 @@ Refinery.View.Sections = Backbone.View.extend({
 	toggleSection: function(evt) {
 		var el_section = $(evt.target).attr('href').replace('#!/', '');
 		
-		//cl('section:: ', el_section)
-		//cl('curr_section:: ', this.current_section)
-		
 		if(this.current_section == el_section) {
-			cl('> toggleSection :: same section')
 			window.location = '#!/';
 			this.current_section = null;
 			Sectionize.reset(evt.target);
 			return false;
 		} else {
-			cl('> toggleSection :: else');
 			Sectionize.toggle(evt.target);
-			$.ajax({
-				url: "backend/get_disciplines_bar.php",
-				type: "POST",
-				data: {category: el_section},
-				success: function(data){
-					$('#' + el_section + '-discbar').html(data);
-				}
-			});
+			loadDisciplineBar(el_section);
 		}
 		
 		this.current_section = el_section;
 	},
+	
+	loadDisciplineBar: function(forSection) {
+		$.ajax({
+			url: "backend/get_disciplines_bar.php",
+			type: "POST",
+			data: {category: forSection},
+			success: function(data){
+				$('#' + forSection + '-discbar').html(data);
+			}
+		});
+	}
 	
 	resetSection: function() {
 		this.current_section = null;
