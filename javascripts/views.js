@@ -78,7 +78,7 @@ Refinery.View.Sections = Backbone.View.extend({
 				$('#' + forSection + '-discbar').html(data);
 			}
 		});
-	}
+	},
 	
 	resetSection: function() {
 		this.current_section = null;
