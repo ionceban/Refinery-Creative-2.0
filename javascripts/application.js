@@ -121,6 +121,8 @@ var startApplication = function() {
 	LiveSeek.init();
 	// app urls and router
 	var application_urls = new Refinery.Router.DefaultUrls({ routes: Refinery.Config.routes });
+	// remove the video to bypass video.ended event
+	$('#video').remove();
 	// ...and co
 	$('#dummy-stack').show();
 	$('#content-wrapper').show();
