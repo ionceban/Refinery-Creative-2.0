@@ -41,7 +41,7 @@ Refinery.View.Sections = Backbone.View.extend({
 			if(this.current_section == null) {
 				this.current_section = el_section;
 				Sectionize.toggle($elem[0]);
-				loadDisciplineBar(el_section);
+				this.loadDisciplineBar(el_section);
 			} else {
 				if(this.current_section == el_section) {
 					return;
@@ -63,7 +63,7 @@ Refinery.View.Sections = Backbone.View.extend({
 			return false;
 		} else {
 			Sectionize.toggle(evt.target);
-			loadDisciplineBar(el_section);
+			this.loadDisciplineBar(el_section);
 		}
 		
 		this.current_section = el_section;
