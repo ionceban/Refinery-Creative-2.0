@@ -152,21 +152,14 @@ var RandomLoader = (function() {
     }
     
     var intervalLoader = function() {
+		var counter =  0;
         timer = setInterval(function() {
-            var elem_index = Math.floor(Math.random() * stack.length) - 1;
-            if(elem_index < 0) {
-               elem_index = 0; 
-            }
-            var elem = stack[elem_index ];
-            
-            if(stack.length < 1) {
-                killInterval();
-                removeFromStack(elem_index);
-                return false;
-            }
-            
-            animateElement(elem);
-            removeFromStack(elem_index);
+			if(counter + 1 > stack.length) {
+				killInterval();
+				return;
+			}
+            animateElement(stack[counter]);
+			counter += 1;
         }, 200)
     }
     
