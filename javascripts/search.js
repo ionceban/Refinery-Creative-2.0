@@ -16,10 +16,6 @@ var LiveSeek = (function() {
 			$(search_wrap).show();
 			overlay_state = 1;
 		}
-		//$('#search-wrap').css({
-		//	//'height': $('#container').height()
-		//	'height': $(this).height()
-		//});
 		// toggles the filter tab's visibility
 		toggleFiltertab('hide');
 		
@@ -42,10 +38,6 @@ var LiveSeek = (function() {
 		// scrolls back to top
 		//scrollAwayFromContainer();
 	}
-	
-	//var scrollAwayFromContainer = function() {
-		//$('#top-bar')
-	//}
 	
 	/**
 	 * animateToContainer
