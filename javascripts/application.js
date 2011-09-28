@@ -165,6 +165,7 @@ var RandomLoader = (function() {
     
     return {
         load: function(items_arr) {
+            killInterval();
             stack = items_arr;
             intervalLoader();
         }
