@@ -1205,6 +1205,14 @@
 			<script type="text/javascript" src="video.js"></script>
 			<script>
 				$(function() {
+						
+				var deviceAgent = navigator.userAgent.toLowerCase();
+				var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
+					if (agentID) {
+						$('#video-wrapper').hide();
+						$('#no-video').show();
+					}
+						
 					// test browser support for html5 video
 					if(!Modernizr.video) {
 						$('#video-wrapper').hide();
