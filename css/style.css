@@ -692,16 +692,15 @@ strong {
     display: table-row;
 }
 #filter-content {
-    background: #000;
-    background: rgba(0,0,0,0.75);
+    background: #000 url(../images/panel-bg.png) repeat;
     box-shadow: 0 6px 5px rgba(0,0,0, 0.4);
     float: none;
     moz-box-shadow: 0 6px 5px rgba(0,0,0, 0.4);
     overflow: hidden;
+	min-height: 200px;
     padding: 6px 7px 13px;
     webkit-box-shadow: 0 6px 5px rgba(0,0,0, 0.4);
     width: 756px;
-    display: table-cell;
 }
 #filter-header {
     border-bottom: 1px solid #4d4d4d;
@@ -771,16 +770,52 @@ strong {
 #filter-content dd .featured {
     color: #539297;
 }
+#trigger-bg {
+	background: url(../images/trigger-bg.png) right repeat-y;
+	width:49px;
+	position: relative;
+	left: 0;
+	-moz-border-radius: 0 10px 10px 0;
+		-webkit-border-radius: 0 10px 10px 0;
+			border-radius: 0 10px 10px 0;
+}
+
 #filter-trigger {
     float: none;
-    display: table-cell;
-    background: #000 url(../images/arrow.jpg) center no-repeat;
-    border-radius: 0 10px 10px 0;
-    border-right: 1px solid #949494;
-    moz-border-radius: 0 10px 10px 0;
-    webkit-border-radius: 0 10px 10px 0;
-    width: 21px;
+	position: relative;
+	z-index: 8000;
+	min-height: 200px;
 }
+/*
+#filter-trigger:before {
+	display: table;
+    content: "";
+	background: url(../images/panel-bg.png) repeat;
+	height: 100%;
+	position: absolute;
+	width: 21px;
+	right: 100%;
+    zoom: 1;
+    *display: inline;
+}
+*/
+#filter-btn {
+	background: url(../images/arrow.png) no-repeat center center;
+	position: absolute;
+	z-index: 9999;
+	width: 49px;
+	height: 187px;
+	left: -4px;
+	top: 50%;
+	margin-top: -93px;
+}
+#filter-row table, #filter-row table td {
+	border-spacing: 0;
+	border-collapse:collapse;
+	margin: 0;
+	padding: 0;	
+}
+
 .ui-widget-overlay {
     background: #000 url(../images/overlay-bg.png) repeat;
     filter: Alpha(Opacity=90);
