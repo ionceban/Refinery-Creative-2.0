@@ -542,8 +542,11 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				//self._openOverlay();
 				self._populateOverlay(data);
 				self._openOverlay();
-				self._VideoJS();
+				/*try { self._VideoJS(); } catch (err){
+					console.log(err);
+				}*/
 				self._overlayInitSlider();
+				self._VideoJS();
 			}
 		});
 	},
@@ -566,8 +569,9 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				data: {image_id: image_id},
 				success: function(data){
 					self._populateOverlay(data);
-					self._VideoJS();
+					//self._VideoJS();
 					self._overlayInitSlider();
+					self._VideoJS();
 				}
 			});
 		});
@@ -670,10 +674,13 @@ Refinery.View.ThumbView = Backbone.View.extend({
 	
 	_VideoJS: function(){
 		$('#overlay video').VideoJS();
+		$('#overlay video.video-js').not(':first').filter(':first').each(function(){
+			$(this)[0].player.play();
+		});
 		//$('#overlay video')[0].player.play();
 		/*$('.bx-next').click(function(){
 			$('#overlay video').not(':first').each(function(){
-				$(this)[0].player.pause();
+		$(this)[0].player.pause();
 			});
 			return false;
 		});
@@ -692,14 +699,23 @@ Refinery.View.ThumbView = Backbone.View.extend({
 			infiniteLoop: false,
 			speed: 300,
 			hideControlOnEnd: true,
-			onAfterSlide: function(a,b,c){
+			onNextSlide: function(a,b,c){
 				c.find('video').filter(':first').each(function(){
+					$('video.video-js').each(function(){
+						$(this)[0].player.pause();
+					});
+					$(this)[0].player.play();
+				});
+			}, onPrevSlide: function(a,b,c){
+				c.find('video').filter(':first').each(function(){
+					$('video.video-js').each(function(){
+						$(this)[0].player.pause();
+					});
 					$(this)[0].player.play();
 				});
 			}
-
 		});
-		$('.bx-next').click(function(){
+		/*$('.bx-next').click(function(){
 			$('#overlay video').not(':first').each(function(){
 				$(this)[0].player.pause();
 			});
@@ -714,7 +730,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		});
 
 
-		$('#main-slider li').filter(':first').css('visibility', 'hidden');
+		$('#main-slider li').filter(':first').css('visibility', 'hidden');*/
 		//$('#overlay video')[1].player.play();
 	}
 	

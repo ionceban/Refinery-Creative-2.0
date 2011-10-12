@@ -189,7 +189,7 @@ void build_Response(table* T){
 				
 		} else {
 			if (T->image_source != 0){
-				Response += "<tr><td><div style='width:222px; height:318px'><a><img src='dummy_source";
+				Response += "<tr><td><div style='width:222px; height:318px'><a href='javascript: void(0)'><img src='dummy_source";
 
 				stringstream dummy_ss;
 				dummy_ss << T->image_source;
@@ -214,7 +214,7 @@ void build_Response(table* T){
 	} else {
 		if (T->TWidth == 2){
 			if (T->image_source != 0){
-				Response += "<tr><td><div style='width:222px; height:147px'><a><img src='dummy_source";
+				Response += "<tr><td><div style='width:222px; height:147px'><a href='javascript: void(0)'><img src='dummy_source";
 
 				stringstream dummy_ss;
 				dummy_ss << T->image_source;
@@ -236,7 +236,7 @@ void build_Response(table* T){
 			}
 		} else {
 			if (T->image_source != 0){
-				Response += "<tr><td><div style='width:99px; height:147px'><a><img src='dummy_source";
+				Response += "<tr><td><div style='width:99px; height:147px'><a href='javascript: void(0)'><img src='dummy_source";
 
 				stringstream dummy_ss;
 				dummy_ss << T->image_source;

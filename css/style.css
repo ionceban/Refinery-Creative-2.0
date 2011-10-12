@@ -783,7 +783,7 @@ strong {
 #filter-trigger {
     float: none;
 	position: relative;
-	z-index: 8000;
+	z-index: 2;
 	min-height: 200px;
 }
 /*
@@ -802,7 +802,7 @@ strong {
 #filter-btn {
 	background: url(../images/arrow.png) no-repeat center center;
 	position: absolute;
-	z-index: 9999;
+	z-index: 2;
 	width: 49px;
 	height: 187px;
 	left: -4px;
