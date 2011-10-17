@@ -5,13 +5,14 @@
  * @namespace Refinery
  */
 var Refinery = {
-	version: '0.1.0'
+	version: '0.1.0',
+	currentSection: null
 };
 
 
 Refinery.Config = {
 	routes: {
-		"/":									"index",
+		"/":								"index",
 		"/website/:section":					"viewWebsiteMains",
 		"/:section":      						"showSection",
 		"/:section/*params":      				"showFilteredSection"
