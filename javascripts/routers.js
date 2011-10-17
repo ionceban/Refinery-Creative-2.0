@@ -35,6 +35,8 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * index action
 	 */
 	index: function() {
+		Refinery.currentSection = null;
+		
 		// close and reset the search wrap
 		LiveSeek.destruct();
 		
@@ -66,7 +68,8 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * MAJOR PROBLEMS HERE
 	 */
 	viewWebsiteMains: function(subsection) {
-		//cl('viewWebsiteMains')
+		Refinery.currentSection = subsection;
+		
 		// close and reset the search wrap
 		LiveSeek.destruct();
 		
@@ -98,11 +101,13 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * Shows only the section without the filters
 	 */
 	showSection: function(section) {
-		//cl('showSection()')
+		//cl(section)
+		
+		Refinery.currentSection = '#' + section + '-nav';
 		
 		// close and reset the search wrap
 		LiveSeek.destruct();
-	
+		
 		// clears the "web" sections
 		this._clearWebSections();
 		
@@ -125,6 +130,8 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * Show the section along with the filters
 	 */
 	showFilteredSection: function(section, params) {
+		Refinery.currentSection = '#' + section + '-nav';
+		
 		//cl('showFilteredSection')
 		// clears the "web" sections
 		this._clearWebSections();
@@ -147,6 +154,8 @@ Refinery.Router.DefaultUrls = Backbone.Router.extend({
 	 * Loads the filter tab content 
 	 */
 	loadFilterContent: function(section, callback) {
+		Refinery.currentSection = '#' + section + '-nav';
+		
 		if(this.live_requests.filter) {
 			this._abortFilterRender();
 		}
