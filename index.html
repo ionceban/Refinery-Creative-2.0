@@ -1053,7 +1053,7 @@
 										send a copy of this message to yourself
 									</div>
 									<input type="submit" id="send-button" name="send" value="send" />
-									<div id="contact-submit-message">Contact text here...</div><!-- end contact-submit-message -->
+									<div id="contact-submit-message"></div><!-- end contact-submit-message -->
 								</div>
 							</form>
 						</section><!-- end contact-form -->
@@ -1276,9 +1276,10 @@
 				// contact form email
 
 				function validateFields(formData, jqForm, options) {
+					$('#contact-submit-message').html('Sending ..');
 					for(var i = 1; i < formData.length; i += 1) {
 						if(!formData[i].value) {
-							alert("Please fill in all details");
+							$('#contact-submit-message').html('ERROR: Please fill in all details!');
 							return false;
 						}
 					}
@@ -1288,7 +1289,7 @@
 				function showMailResponse(responseText, statusText, xhr, $form) {
 					if(responseText == "success") {
 						$('#contact-form')[0].reset();
-						alert('Message sent');
+						$('#contact-submit-message').html('Message sent! Thank you.');
 					}
 				}
 
