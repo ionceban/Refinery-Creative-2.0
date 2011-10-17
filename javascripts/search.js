@@ -35,8 +35,20 @@ var LiveSeek = (function() {
 		$(input_field).blur();
 		// toggles the filter tab's visibility
 		toggleFiltertab('show');
-		// scrolls back to top
-		//scrollAwayFromContainer();
+	}
+	
+	var fuckMe = function() {
+		if(Refinery.currentSection != null) {
+			var isWebSection = ['work', 'about', 'careers', 'contact'].indexOf(Refinery.currentSection);
+			if(isWebSection != -1) {
+				$('body, html').animate({ scrollTop: 0 }, {duraction: 350});
+				window.location = '#!/';
+			} else {
+				Sectionize.goToSection($(Refinery.currentSection));
+			}
+		} else {
+			Sectionize.goToSection(0);
+		}
 	}
 	
 	/**
@@ -45,8 +57,8 @@ var LiveSeek = (function() {
 	 */
 	var scrollToContainer = function(where) {
 		var winGutter = (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("win") != -1) ? 76 : 88;
-		var alreadyScrolled = true;
-		var scrollValue = $('#search-wrap').offset().top - winGutter;
+		var alreadyScrolled = true,
+			scrollValue = $('#search-wrap').offset().top - winGutter;
 			
 		if(alreadyScrolled) {
 			$('body, html').animate({ scrollTop: scrollValue }, {
@@ -99,6 +111,7 @@ var LiveSeek = (function() {
 			var code = (e.keyCode ? e.keyCode : e.which);
 			if(code == 27) {
 				closeOverlay();
+				fuckMe();
 				return;
 			}
 			field_modified = true;
@@ -122,12 +135,14 @@ var LiveSeek = (function() {
 		$('#close-search-wrap').click(function(e) {
 			e.preventDefault();
 			abortAjax();
+			fuckMe();
 			closeOverlay();
 		});
 		
 		$('#close-button').click(function(e) {
 			e.preventDefault();
 			abortAjax();
+			fuckMe();
 			closeOverlay();
 			resetInput();
 		});
