@@ -3,7 +3,7 @@
  * - toggles the main items from #work section
  */
 var Sectionize = (function() {
-	var winGutter = (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("win") != -1) ? 76: 90;
+	var winGutter = (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("win") != -1) ? 76 : 90;
 	var defaults = {
 		topGutter: winGutter
 	}
@@ -80,6 +80,17 @@ var Sectionize = (function() {
 		currentElement = elem;
 	}
 	
+	/**
+	 * justGoToSection
+	 */
+	var justGoToSection = function(elem) {
+		if(elem == 0) {
+			$('body, html').animate({ scrollTop: 0});
+			return false;
+		}
+		scrollTo(getOffset(elem));
+	}
+	
 	var scrollToElement = function(elem) {
 		var elemOffset = getOffset(elem);
 		openSection(elem);
@@ -89,6 +100,10 @@ var Sectionize = (function() {
 	return {
 		toggle: function(elem, _options) {
 			scrollToElement(elem);
+		},
+		
+		goToSection: function(elem) {
+			justGoToSection(elem);
 		},
 		
 		reset: function(elem) {
@@ -120,4 +135,3 @@ var Sectionize = (function() {
 		}
 	}
 })();
-
