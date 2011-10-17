@@ -3,8 +3,9 @@
  * - toggles the main items from #work section
  */
 var Sectionize = (function() {
+	var winGutter = (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("win") != -1) ? 76: 90;
 	var defaults = {
-		topGutter: 69
+		topGutter: winGutter
 	}
 	
 	var currentElement = null;

@@ -44,8 +44,9 @@ var LiveSeek = (function() {
 	 * @description scroll the window to the container's x
 	 */
 	var scrollToContainer = function(where) {
-		var alreadyScrolled = true,
-			scrollValue = $('#search-wrap').offset().top - 69;
+		var winGutter = (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("win") != -1) ? 76 : 88;
+		var alreadyScrolled = true;
+		var scrollValue = $('#search-wrap').offset().top - winGutter;
 			
 		if(alreadyScrolled) {
 			$('body, html').animate({ scrollTop: scrollValue }, {

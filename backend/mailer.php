@@ -6,12 +6,13 @@
 	$message = $_POST['message'];
 	$subject = "Refinery Message";
 	$headers = 'From: "' . $first_name  . ' ' . $last_name . '" <' . $from . '>';
+	$headers2 = 'From: "' . 'Refinery' . ' ' . 'Creative' . '" <' . $to . '>';
 	if (!mail($to, $subject, $message, $headers)){
 		die("failed");
 	}
 	
 	if ($_POST['self_message']){
-		if (!mail($from, $subject, $message, $headers)){
+		if (!mail($from, $subject, $message, $headers2)){
 			die("failed");
 		}
 	}
