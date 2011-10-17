@@ -75,6 +75,7 @@ var Scrollize = (function() {
  */
 var webSections = (function() {
 	var current_section = null;
+	var is_animating = false;
 	
 	var tunes = {
 		'work': 50,
@@ -91,19 +92,18 @@ var webSections = (function() {
 			$('#top-bar').find('a[rel="' + subsection + '"]').addClass('active');
 			var scroll = $('#' + subsection).offset().top - tunes[subsection];
 			
-			$('html, body').animate({
+			$('html, body').stop().animate({
 				scrollTop: scroll
 			},
 			{
 				duration: 350,
-				//easing: 'easeInOutExpo',
-				//easing: 'linear',
-				//easing: 'easeInSine',
-				//easing: 'easeInOutQuint',
-				//easing: 'easeOutBack',
+				complete: function() {
+					is_animating = false;
+				}
 			});
 			
 			current_section = subsection;
+			is_animating = true;
 		}
 	}
 })();
