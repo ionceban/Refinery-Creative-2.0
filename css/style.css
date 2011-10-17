@@ -567,7 +567,7 @@ strong {
 #motion-nav:hover, #motion-nav.active {
     color: #cc6a73;
 }
-#home-nav:hover, #home-nav.active {
+#home-entertainment-nav:hover, #home-entertainment-nav.active {
     color: #549966;
 }
 #broadcast-nav:hover, #broadcast-nav.active {
@@ -1189,7 +1189,3 @@ strong {
 		display:block;
 		opacity:0;
 	}
-
-#send-button{
-	cursor: pointer;
-}
