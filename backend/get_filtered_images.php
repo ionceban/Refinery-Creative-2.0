@@ -44,26 +44,34 @@
 	
 	// parsing "_"-separated strings. ALL if BLANK
 	
+	$has_discos = 0;
+	
 	if ($_POST['discipline']){
 		$disciplines_array = list_to_array($_POST['discipline']);
+		if ($_POST['discipline'] != '' && $_POST['discipline'] != 'show-all') $has_discos = 1;
 	} else {
 		$disciplines_array = array();
 	}
+
+	$has_others = 0;
 	
 	if ($_POST['deliverable']){
 		$deliverables_array = list_to_array($_POST['deliverable']);
+		if ($_POST['deliverable'] != '' && $_POST['deliverable'] != 'show-all') $has_others = 1;
 	} else {
 		$deliverables_array = array();
 	}
 	
 	if ($_POST['keywords']){
 		$keywords_array = list_to_array($_POST['keywords']);
+		if ($_POST['keywords'] != '' && $_POST['keywords'] != 'show-all') $has_others = 1;
 	} else {
 		$keywords_array = array();
 	}
 	
 	if ($_POST['year']){
 		$years_array = list_to_array($_POST['year']);
+		if ($_POST['year'] != '' && $_POST['year'] != 'show-all') $has_others = 1;
 	} else {
 		$years_array = array();
 	}
@@ -79,11 +87,23 @@
 	
 	$query_statement .= " WHERE ";
 
-	// not shadowbox-only
-	$query_statement .= "images.shadowbox=0";
+	// not shadowbox-only + second tier rules
+	$to_shadow = 1;
+	
+	if ($has_others == 1){
+		$to_shadow = 0;
+	}
+
+	if (($_POST['category'] == 'av' || $_POST['category'] == 'digital motion') && $has_discos == 1){
+		$to_shadow = 0;
+	}
+	
+	if ($to_shadow == 1){
+		$query_statement .= "images.shadowbox=0 AND ";
+	}
 
 	// not in queue
-	$query_statement .= " AND images.queued=0";
+	$query_statement .= "images.queued=0";
 	
 	// category match
 	
