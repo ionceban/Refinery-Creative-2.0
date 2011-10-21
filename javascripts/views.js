@@ -677,6 +677,7 @@ Refinery.View.ThumbView = Backbone.View.extend({
 		$('#overlay video.video-js').not(':first').filter(':first').each(function(){
 			$(this)[0].player.play();
 		});
+		$('#main-slider li').filter(':first').css('visibility', 'hidden');
 		//$('#overlay video')[0].player.play();
 		/*$('.bx-next').click(function(){
 			$('#overlay video').not(':first').each(function(){
