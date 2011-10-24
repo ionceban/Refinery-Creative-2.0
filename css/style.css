@@ -521,6 +521,7 @@ strong {
     color: #000;
     font-family: 'HelveticaNeueBold';
     font-size: 36px;
+	cursor: pointer;
 }
 #work-inner {
 	padding-top:24px;
