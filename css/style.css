@@ -523,6 +523,11 @@ strong {
     font-size: 36px;
 	cursor: pointer;
 }
+
+#send-button:hover {
+	color: #505050;
+}
+
 #work-inner {
 	padding-top:24px;
     overflow: hidden;
