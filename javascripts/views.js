@@ -598,8 +598,14 @@ Refinery.View.ThumbView = Backbone.View.extend({
 				$('.ui-dialog').css({ 'top': 0 });
 			}
 		});
+
+		var self = this;
 		
 		this._adjustOverlayPosition();
+		
+		$(window).resize(function(){
+			self._adjustOverlayPosition();
+		});
 		
 		$('#close-button').click( function() {
 			$( "#overlay" ).dialog('close');
