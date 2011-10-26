@@ -44,7 +44,7 @@
 	$query_statement = "SELECT COUNT(*) FROM images, " . $cross_table . " WHERE ";
 	$query_statement .= "(images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $cross_table . "." . $table_id . "='" . $category_id . "'";
-	$query_statement .= " AND images.queued=0 AND images.shadowbox=0)";
+	$query_statement .= " AND images.queued=0)";
 	$query = mysql_query($query_statement, $db_conn);
 	$row = mysql_fetch_row($query);
 	
@@ -70,7 +70,11 @@
 	$query_statement .= ", disciplines WHERE (images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
 	$query_statement .= " AND disciplines.id=" . $cross_table . ".discipline_id";
-	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0 AND images.shadowbox=0) GROUP BY disciplines.name";
+	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0";
+	if ($category != 'av' && $category != 'digital motion'){
+		$query_statement .= " AND images.shadowbox=0";
+	}
+	$query_statement .= ") GROUP BY disciplines.name";
 	$query_statement .= " ORDER BY disciplines.name";
 	$query = mysql_query($query_statement, $db_conn);
 	
@@ -94,7 +98,7 @@
 	$query_statement .= " WHERE (images.id=imgdelivs.image_id AND deliverables.id=imgdelivs.deliverable_id";
 	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
-	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0 AND images.shadowbox=0)";
+	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0)";
 	$query_statement .= " GROUP BY deliverables.name ORDER BY deliverables.name";
 	$query= mysql_query($query_statement, $db_conn);
 	
@@ -118,7 +122,7 @@
 	$query_statement .= "WHERE (images.id=imgkeyws.image_id AND keywords.id=imgkeyws.keyword_id AND keywords.hidden=0";
 	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
-	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0 AND images.shadowbox=0)";
+	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0)";
 	$query_statement .= " GROUP BY keywords.name ORDER BY keywords.name";
 	$query = mysql_query($query_statement, $db_conn);
 	
@@ -142,7 +146,7 @@
 	$query_statement .= " WHERE (years.id=images.year_id";
 	$query_statement .= " AND images." . $cross_table_id . "=" . $cross_table . ".id";
 	$query_statement .= " AND " . $table . ".id=" . $cross_table . "." . $table_id;
-	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0 AND images.shadowbox=0)";
+	$query_statement .= " AND " . $table . ".name='" . $category . "' AND images.queued=0)";
 	$query_statement .= " GROUP BY years.value ORDER BY years.value";
 	$query = mysql_query($query_statement, $db_conn);
 	
