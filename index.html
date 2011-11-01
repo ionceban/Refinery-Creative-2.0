@@ -360,19 +360,19 @@
 						<section id="about-wrapper">
 							<div id="about-inner">
 								<section class="about-entry">
-									<h2>Adam Waldman, Partner/Creative Director</h2>
+									<h2>Adam Waldman, <em>Partner/Creative Director</em></h2>
 									<p>
 										Adam Waldman, a Northern California transplant, has over 15 years of experience in entertainment advertising. He began his career at NBC and quickly segued over to the Agency side, in both theatrical and broadcast print design. Since then he's been the creative force behind key art for some of the biggest film franchises of all time. Adam's award-winning career trajectory includes BLT, Concept Arts and Trailer Park Print.
 									</p>
 								</section><!-- end about-entry -->
 								<section class="about-entry">
-									<h2>Brad Hochberg, Partner/Creative Director</h2>
+									<h2>Brad Hochberg, <em>Partner/Creative Director</em></h2>
 									<p>
 										Brad Hochberg was born, raised and educated in the arts in Boston, Massachusetts. Upon graduating he headed west to Los Angeles to pursue a design and advertising career, launching that dream at Seiniger Advertising. Over the past twenty years he has had the great pleasure of working alongside the industry's best and brightest award-winning talents at entertainment marketing agencies Poetic Justice, Concept Arts and Trailer Park.
 									</p>
 								</section><!-- end about-entry -->
 								<section class="about-entry">
-									<h2>Brett Winn, AV Division Partner/Creative Director</h2>
+									<h2>Brett Winn, <em>AV Division Partner/Creative Director</em></h2>
 									<p>
 										Brett Winn brings over a decade of award-winning experience producing and editing for filmed entertainment. Launching his career along with the FX Networks, he later worked at the FOX Broadcasting Company and the Studio City agency. He built the broadcast promotion division at Trailer Park, and while there, he transitioned into theatrical trailers and became an award-winning senior editor. He took a short break to co-direct, produce and edit the award-winning feature, My Date with Drew. Then, looking to enhance his marketing perspective, Brett moved to the studio side as a Vice President of Creative Services at Disney Studios. In 2008, Brett opened the doors of the Audio/Visual division of The Refinery.
 									</p>
@@ -385,8 +385,8 @@
 									</section>--><!-- end about-entry -->
 								<section class="about-entry">
 									<h2>Jim Pascoe,
-									<br />
-									Creative Director</h2>
+									
+									<em>Creative Director</em></h2>
 									<p>
 										For the past 20 years, Jim Pascoe has been generating, collaborating on, and executing creative ideas. A specialist in publication and packaging design, he has won multiple Key Art Awards, including a 2010 Best in Show for Coraline. For nearly a decade he ran the independent crime fiction publishing house UglyTown, where he and his partner handled all of the editorial, marketing, and design. He is the author of 13 books and was the creative director/producer on Disney/ABC Cable Network Group's interactive television program JETIX Cards Live, which won a 2004 Emmy Award (Outstanding Achievement in Advanced Media Technology).
 									</p>
@@ -990,7 +990,7 @@
 					<section id="contact-content">
 						<section class="contact-info">
 							<header>
-								<h3>the refinery</h3>
+								<h3><img src="images/logo.png" alt="refinery" /></h3>
 							</header>
 							<div id="contact-details">
 							<h5>Refinery East Campus</h5>
@@ -1234,7 +1234,7 @@
 					})
 					// login hover
 					$('#header-inner.active').find("#login-dropdown").live('hover', function() {
-						$(this).next().fadeIn('fast').show();
+						$(this).parent().find(".login-dropdown-wrapper").show();
 
 						$(this).parent().hover(function() {
 						}, function() {
@@ -1246,7 +1246,7 @@
 					});
 					//employee-login
 					$('#header-inner.active').find("#employee-login").live('hover', function() {
-						$(this).next().fadeIn('fast').show();
+						$(this).parent().find(".login-dropdown-wrapper").show();
 
 						$(this).parent().hover(function() {
 						}, function() {
