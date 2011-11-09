@@ -30,7 +30,7 @@ section, header, footer, aside, article, nav, details, summary {
  text-shadow: 0 0 0 transparent, 0 1px 1px #FF0;
 }
 body {
-	background: #fff url(../images/bg.jpg) repeat;
+	background: #fff url(../images/bg.png) repeat;
 	color: #1a1e1f;
 	font-family: 'HelveticaNeueLight', Arial, Helvetica, sans-serif;
 }
@@ -1058,6 +1058,7 @@ strong {
 	line-height: 1;
 	font-weight: 100 !important;
 	letter-spacing: -1px;
+	padding: 0 0 4px 0;
 }
 #careers-content h1 span {
 	color: #1a1e1f;
@@ -1095,8 +1096,8 @@ strong {
 	color: #000;
 	font-family: 'helveticaRoman', Arial, sans-serif;
 	font-size: 14px;
-	line-height: 1;
-	margin: 0 0 12px 6px;
+	line-height: 1.2;
+	margin: 0 0 13px 6px;
 	padding: 0 0 0 17px;
 }
 #enter-wrapper dd strong, #enter-wrapper dd a {
